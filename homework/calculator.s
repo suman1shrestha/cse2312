@@ -59,8 +59,8 @@ _compare:
 
 _printf:
 	MOV R4, LR 				@ store LR since printf call overwrites
-	LDR R0, =format_str		@ R0 contains formatted string address
-	MOV R8, R8				@ R8 contains printf argument (redundant line)
+	LDR R0, =print_str		@ R0 contains formatted string address
+	MOV R1, R8				@ R8 contains printf argument (redundant line)
 	BL printf 				@ call printf
 	MOV PC, R4				@ return
 
@@ -80,6 +80,7 @@ _max:
 	CMP R1, R3
 	MOVGT R0, R1
 	MOVLT R0, R3
+	MOV PC, LR
 
 
 .data
