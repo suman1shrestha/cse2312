@@ -12,11 +12,14 @@
 
 main:
 	BL _scanf				@ branch to scanf prodecure with return
-	MOV R1, R0
+	MOV R9, R0
 	BL _getchar
-	MOV R2, R0
+	MOV R10, R0
 	BL _scanf
-	MOV R3, R0
+	MOV R11, R0
+	MOV R1, R9
+	MOV R2,	R10
+	MOV R3, R11
 	BL _compare
 	MOV R8, R0
 	BL _printf
@@ -30,10 +33,10 @@ _getchar:
 	SWI 0					@ excute the system call
 	LDR R0, [R1]			@ move the character to the return register
 	AND R0, #0xFF			@ mask out all but the lowest 8 bits
-	MOV PC LDR 				@ return
+	MOV PC, LR 				@ return
 
 _scanf:
-	MOV R4, LDR 			@ store LR since scanf call overwrites
+	MOV R4, LR 			@ store LR since scanf call overwrites
 	SUB SP, SP, #4			@ make romm on stack
 	LDR R0, =format_str		@ R0 contains address of format string
 	MOV R1, SP 				@ move SP to R1 to store entry on stack
@@ -43,6 +46,7 @@ _scanf:
 	MOV PC, R4				@ return
 
 _compare:
+	MOV R4, LR
 	CMP R2, #'+'			@ compare against the constant char '+'
 	BLEQ _add				@ branch to equal handler
 	CMP R2, #'-'			@ compare against the constatn char '-'
@@ -51,6 +55,7 @@ _compare:
 	BLEQ _mult				@ branch to equal handler
 	CMP R2, #'M'			@ compare against the constatn char 'M'
 	BLEQ _max				@ branch to equal handler
+	MOV PC, R4
 
 _printf:
 	MOV R4, LR 				@ store LR since printf call overwrites
@@ -68,7 +73,7 @@ _sub:
 	MOV PC, LR
 
 _mult:
-	MULT R0, R1, R3
+	MUL R0, R1, R3
 	MOV PC, LR
 
 _max:
@@ -80,4 +85,5 @@ _max:
 .data
 format_str:		.asciz		"%d"
 read_char:		.ascii		" "
+print_str:		.asciz		"%d\n"
 
