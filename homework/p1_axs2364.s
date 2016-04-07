@@ -14,14 +14,14 @@ main:
     MOV R2, R8	             @ move the content from R8 to R2
     MOV R3 ,R9 	             @ move the content from R9 to R3
     BL _compare	             @ branch to compare
-    MOV R3, R0	             @ move content from R0 to R3
+    MOV R5, R0	             @ move content from R0 to R3
     BL _printf	             @ branch to printf
     B main
 
 _scanf:
     MOV R7, LR              @ move LR to R7
     SUB SP, SP, #4          @ make room on the stack
-    LDR R0, =format_str		@ R0 has the address of format string
+    LDR R0, =format_num		@ R0 has the address of format string
     MOV R1, SP              @ move the content of SP to R1
     BL scanf                @ call scanf
     LDR R0, [SP]            @ load the content of SP in R0
@@ -29,7 +29,7 @@ _scanf:
     MOV PC, R7              @ return
 
 _getchar:
-    MOV R4, #3              @ write syscall, 3
+    MOV R7, #3              @ write syscall, 3
     MOV R0, #0              @ input stream from the monitor, 0
     MOV R2, #1              @ read a single character
     LDR R1, =read_char      @ store the character in the data memory..
@@ -39,7 +39,7 @@ _getchar:
     MOV PC, LR              @ return
 
 _compare:
-    MOV  R7, LR		@ store LR since printf call overwrites
+    MOV  R4, LR		@ store LR since printf call overwrites
 	CMP  R2, #'+'	@ compare with "+" 
 	BLEQ _add		@ branch and link if equal to "+"
 	CMP  R2, #'-'	@ compare with "-"
@@ -48,14 +48,14 @@ _compare:
     BLEQ _multp		@ branch and link if equal to "*"
 	CMP  R2, #'M'	@ compare with "M" char
     BLEQ _max		@ branch and link if equal to "M"
-	MOV  PC, R7  	@ return
+	MOV  PC, R4  	@ return
     
 _printf:
-    MOV R7, LR              @ store LR since printf call overwrites
+    MOV R4, LR              @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
 	MOV R1, R5              @ R1 contains printf argument (redundant li$
     BL  printf              @ call printf
-    MOV PC, R7              @ return     
+    MOV PC, R4              @ return     
 
 
 _add:
@@ -79,5 +79,5 @@ _max:
 
 .data
 format_num: .asciz        "%d"
-read_char:      .ascii    "  "
+read_char:      .ascii    " "
 printf_str:     .asciz    "%d\n"
