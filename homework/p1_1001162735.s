@@ -12,22 +12,22 @@
 
 main:
 	BL _scanf				@ branch to scanf prodecure with return
-	MOV R9, R0				
-	BL _getchar
-	MOV R10, R0
-	BL _scanf
-	MOV R11, R0
-	MOV R1, R9
-	MOV R2,	R10
-	MOV R3, R11
-	BL _compare
-	MOV R8, R0
-	BL _printf
-	B main
+	MOV R9, R0				@ move return value R0 to argument register R9
+	BL _getchar             @ branch to getchar procedure with return
+	MOV R10, R0             @ move return value R0 to argument register R10
+	BL _scanf               @ branch to scanf prodecure with return
+	MOV R11, R0             @ move return value R0 to argument register R11
+	MOV R1, R9              @ move return value R9 to argument register R1
+	MOV R2,	R10             @ move return value R10 to argument register R2
+	MOV R3, R11             @ move return value R11 to argument register R3
+	BL _compare             @ branch to compare prodecure with return
+	MOV R8, R0              @ move return value R0 to argument register R8
+	BL _printf              @ branch to printf prodecure with return
+	B main                  @ branch to main prodecure with no return
 
 _getchar:
 	MOV R7, #3 				@ write syscall, 4
-	MOV R0, #0				@ output stream to monitor, 1
+	MOV R0, #0				@ input stream from monitor, 1
 	MOV R2, #1				@ read a single character
 	LDR R1, =read_char			@ store the character in data memory
 	SWI 0					@ execute the system call
@@ -65,7 +65,7 @@ _printf:
 	MOV PC, R4				@ return
 
 _add: 
-	ADD R0, R1, R3				
+	ADD R0, R1, R3              
 	MOV PC, LR
 
 _sub:
