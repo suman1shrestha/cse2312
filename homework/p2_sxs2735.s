@@ -17,14 +17,14 @@ main:
 	MOV R9, R0				@ move return value R0 to argument register R9
 	MOV R5, R0
 	BL _scanf              			@ branch to scanf prodecure with return
-	MOV R11, R0            			@ move return value R0 to argument register R11
+	MOV R10, R0            			@ move return value R0 to argument register R11
 	MOV R6, R0
 	MOV R1, R9             			@ move return value R9 to argument register R1
-	MOV R2, R11            			@ move return value R11 to argument register R3
+	MOV R2, R10            			@ move return value R11 to argument register R3
 	BL count_partitions            			@ branch to compare prodecure with return
-	MOV R1, R5
-	MOV R2, R6
-	MOV R3, R0             			@ move return value R0 to argument register R8
+	MOV R1, R0
+	MOV R2, R5
+	MOV R3, R6             			@ move return value R0 to argument register R8
 	BL _printf             			@ branch to printf prodecure with return
 	B main                 			@ branch to main prodecure with no return
 
@@ -34,30 +34,33 @@ count_partitions:
 	MOVEQ R0, #1
 	POPEQ {PC}
 
-	PUSH {R1}
 	CMP R1, #0
 	MOVLT R0, #0
 	POPLT {PC}
 
-	PUSH {R2}
 	CMP R2, #0
 	MOVEQ R0, #0
 	POPEQ {PC}
 
-	PUSH {LR}
 	PUSH {R1}
 	PUSH {R2}
-	MOV R0, R2
-	MOV R2, R1
-	SUB R1, R0, #1
+	@MOV R0, R2
+	@MOV R2, R1
+	SUB R2, R2, #1
 	BL count_partitions
 	MOV R11, R0
-	POP {R1}
 	POP {R2}
+	POP {R1}
+	PUSH {R1}
+	PUSH {R2}
+	PUSH {R11}
 	SUB R1, R1, R2
 	BL count_partitions
-	MOV R12, R0
-	ADD R0, R11, R12
+	POP {R11}
+	POP {R2}
+	POP {R1}
+	ADD R11, R11, R0
+	MOV R0, R11
 	POP {PC}
 
 _scanf:
