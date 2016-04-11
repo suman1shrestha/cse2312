@@ -41,7 +41,7 @@ count_partitions:
 	CMP R2, #0				@ else if (m == 0)
 	MOVEQ R0, #0				@ R0 = 0
 	POPEQ {PC}				@ return R0
-	
+
 	@ For Recursion
 	PUSH {R1}				@ backup input argument value, n
 	PUSH {R2}				@ backup input argument value, m
@@ -63,14 +63,14 @@ count_partitions:
 	POP {PC}				@ restore the stack pointer and return
 
 _scanf:
-	MOV R4, LR 				@ store LR since scanf call overwrites
+	PUSH {LR} 				@ store LR since scanf call overwrites
 	SUB SP, SP, #4				@ make romm on stack
 	LDR R0, =format_str			@ R0 contains address of format string
 	MOV R1, SP 				@ move SP to R1 to store entry on stack
 	BL scanf 				@ call scanf
 	LDR R0, [SP]  				@ load value at SP into R0
 	ADD SP, SP, #4				@ restore the stack pointer
-	MOV PC, R4				@ return
+	POP {PC}				@ return
 
 _printf:
 	PUSH {LR} 				@ store LR since printf call overwrites
