@@ -6,7 +6,7 @@
 * from keyboard, and count the number of integer partitions of a positive 
 * integer n with parts up to m
 *
-* @author Suman Shrestha
+* @author Suman Shrestha	04/12/2016
 *******************************************************************************/
 
 	.global main
