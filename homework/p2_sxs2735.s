@@ -15,17 +15,21 @@
 main:
 	BL _scanf				@ branch to scanf prodecure with return
 	MOV R9, R0				@ move return value R0 to argument register R9
+	MOV R5, R0
 	BL _scanf              			@ branch to scanf prodecure with return
 	MOV R11, R0            			@ move return value R0 to argument register R11
+	MOV R6, R0
 	MOV R1, R9             			@ move return value R9 to argument register R1
 	MOV R2, R11            			@ move return value R11 to argument register R3
 	BL count_partitions            			@ branch to compare prodecure with return
-	MOV R8, R0             			@ move return value R0 to argument register R8
+	MOV R1, R5
+	MOV R2, R6
+	MOV R3, R0             			@ move return value R0 to argument register R8
 	BL _printf             			@ branch to printf prodecure with return
 	B main                 			@ branch to main prodecure with no return
 
 count_partitions:
-	PUSH{LR}
+	PUSH {LR}
 	CMP R1, #0
 	MOVEQ R0, #1
 	POPEQ {PC}
@@ -67,11 +71,11 @@ _scanf:
 	MOV PC, R4				@ return
 
 _printf:
-	MOV R4, LR 				@ store LR since printf call overwrites
+	PUSH {LR} 				@ store LR since printf call overwrites
 	LDR R0, =print_str			@ R0 contains formatted string address
-	MOV R1, R8				@ R8 contains printf argument (redundant line)
+	@MOV R1, R8				@ R8 contains printf argument (redundant line)
 	BL printf 				@ call printf
-	MOV PC, R4				@ return
+	POP {PC}				@ return
 
 
 .data
