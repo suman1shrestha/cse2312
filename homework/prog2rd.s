@@ -18,28 +18,6 @@ main:
   BL _printf
   B main
   
-_exit:
-  MOV R7, #4
-  MOV R0, #1
-  MOV R2, #21
-  LDR R1, = exit_str
-  SWI 0
-  MOV R7, #1
-  SWI 0
-
-_prompt:               
-  PUSH {R1}
-  PUSH {R2}
-  PUSH {R7}
-  MOV R7, #4                  @write syscall, 4            
-  MOV R0, #1                  @output stream to monitor, 1
-  MOV R2, #37                 @print string length
-  LDR R1, =prompt_str     
-  SWI 0                       @execute syscall    
-  POP {R7}
-  POP {R2}
-  POP {R1}
-  MOV PC, LR                  @return  
 
 _printf:
   PUSH {LR}
@@ -87,12 +65,10 @@ _fact:
   POP {R6}
   POP {R2}
   POP {R1}
-  ADD R6, R6, R0
-  MOV R0, R6
+  ADD R0, R6, R0
   POP {PC}
    
 .data
-number:					.word 	  0
 format_str:             .asciz    "%d"
 prompt_str:             .ascii    "Enter a number and press result key: "
 printf_str:             .asciz    "Therefore, %d with %d and %d\n"
