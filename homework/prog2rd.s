@@ -6,11 +6,15 @@ main:
   BL _scanf                   @branch to _scanf with return
   MOV R4, R0                  @move return value R0 to R6
   MOV R1, R0
-  BL _fact                  @branch to _prompt with return
-  MOV R1, R4
+  BL _scanf
+  MOV R5, R0
   MOV R2, R0
+  BL _fact                  @branch to _prompt with return
+  MOV R1, R0
+  MOV R2, R4
+  MOV R3, R5
   BL _printf
-  B _exit
+  B main
   
 _exit:
   MOV R7, #4
@@ -36,14 +40,10 @@ _prompt:
   MOV PC, LR                  @return  
 
 _printf:
-  MOV R4, LR
   PUSH {LR}
   LDR R0, =printf_str
-  MOV R1, #100
-  MOV R2, #200
   BL printf
   POP {PC}
-  MOV PC, R4
   
 _scanf:
   MOV R4, LR
@@ -61,37 +61,38 @@ _scanf:
   
 _fact:
   PUSH {LR}
-  CMP R1,#1
+  CMP R1,#0
   MOVEQ R0, #1
   POPEQ {PC}
   
-  CMP R1, #1
+  CMP R1, #0
   MOVLT R0, #1
+  POPLT {PC}
   
-  CMP R2, #1
-  MOVEQ R0, #1
+  CMP R2, #0
+  MOVEQ R0, #0
   POPEQ {PC}
   
   PUSH {R1}
-  
-  MOV R0, R2
-  MOV R2, R1
+  PUSH {R2}
   SUB R1, R2, #1
-  MOV R2, R0
   BL _fact
-  
+  MOV R7, R0
+  POP {R2}
   POP {R1}
   
-  SUB R2, R2, #1
+  PUSH {R1}
+  PUSH {R2}
+  SUB R1, R1, R2
   BL _fact
-  MOV R10, R0
-  POP {R0}
-  ADD R0, R0, R8
+  POP {R2}
+  POP {R1}
+  ADD R0, R7, R0
   POP {PC}
    
 .data
 number:					.word 	  0
 format_str:             .asciz    "%d"
 prompt_str:             .ascii    "Enter a number and press result key: "
-printf_str:             .asciz    "Therefore, the result is: %d\n"
+printf_str:             .asciz    "Therefore, %d with %d and %d\n"
 exit_str:				.ascii 	  "Terminating program.\n"
