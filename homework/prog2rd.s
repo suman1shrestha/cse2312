@@ -59,14 +59,14 @@ _fact:
   
   PUSH {R1}
   PUSH {R2}
-  PUSH {R12}
+  PUSH {R6}
   SUB R1, R1, R2
   BL _fact
-  POP {R12}
+  POP {R6}
   POP {R2}
   POP {R1}
-  ADD R12, R12, R0
-  MOV R0, R12
+  ADD R0, R6, R0
+  POP {PC}
    
 .data
 format_str:             .asciz    "%d"
