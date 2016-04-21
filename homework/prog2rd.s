@@ -81,8 +81,10 @@ _fact:
   
   PUSH {R1}
   PUSH {R2}
+  PUSH {R6}
   SUB R1, R1, R2
   BL _fact
+  POP {R6}
   POP {R2}
   POP {R1}
   ADD R6, R6, R0
