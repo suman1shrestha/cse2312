@@ -65,11 +65,12 @@ _fact:
   POP {R6}
   POP {R2}
   POP {R1}
-  ADD R0, R6, R0
+  ADD R6, R6, R0
+  MOV R0, R6
   POP {PC}
    
 .data
 format_str:             .asciz    "%d"
-prompt_str:             .ascii    "Enter a number and press result key: "
+@prompt_str:             .ascii    "Enter a number and press result key: "
 printf_str:             .asciz    "Therefore, %d with %d and %d\n"
-exit_str:				.ascii 	  "Terminating program.\n"
+@exit_str:				.ascii 	  "Terminating program.\n"
