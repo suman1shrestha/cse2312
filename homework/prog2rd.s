@@ -63,7 +63,7 @@ _scanf:
   
 _fact:
   PUSH {LR}
-  CMP R1,#0
+  CMP R1, #0
   MOVEQ R0, #1
   POPEQ {PC}
   
@@ -89,7 +89,8 @@ _fact:
   BL _fact
   POP {R2}
   POP {R1}
-  ADD R0, R7, R0
+  ADD R7, R7, R0
+  MOV R0, R7
   POP {PC}
    
 .data
