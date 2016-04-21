@@ -2,7 +2,7 @@
       .func main
 
 main:
-  BL _prompt                  @branch to _prompt with return                 
+  @BL _prompt                  @branch to _prompt with return                 
   BL _scanf                   @branch to _scanf with return
   MOV R4, R0                  @move return value R0 to R6
   MOV R1, R0
