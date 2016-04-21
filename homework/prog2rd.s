@@ -15,7 +15,7 @@ main:
   MOV R1, R0
   MOV R2, R8
   MOV R3, R9
-  BL _printf
+  @BL _printf
   B main
   
 
