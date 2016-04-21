@@ -48,14 +48,14 @@ _printf:
   POP {PC}
   
 _scanf:
-  MOV R4, LR
+  PUSH {LR}
   SUB SP, SP, #4
   LDR R0, =format_str
   MOV R1, SP
   BL scanf
   LDR R0, [SP]
   ADD SP, SP, #4
-  MOV PC, R4
+ POP {PC}
   
 _fact:
   PUSH {LR}
