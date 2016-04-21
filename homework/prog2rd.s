@@ -5,7 +5,7 @@ main:
   @BL _prompt                  @branch to _prompt with return                 
   BL _scanf                   @branch to _scanf with return
   MOV R10, R0                  @move return value R0 to R6
-  MOV R8, R0
+  MOV R11, R0
   BL _scanf
   MOV R5, R0
   MOV R9, R0
@@ -13,9 +13,9 @@ main:
   MOV R2, R5
   BL _fact                  @branch to _prompt with return
   MOV R1, R0
-  MOV R2, R8
+  MOV R2, R11
   MOV R3, R9
-  @BL _printf
+  BL _printf
   B main
   
 
@@ -41,7 +41,6 @@ _fact:
   MOVEQ R0, #1
   POPEQ {PC}
   
-  prompt_str
   CMP R1, #0
   MOVLT R0, #0
   POPLT {PC}
