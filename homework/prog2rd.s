@@ -92,6 +92,6 @@ _fact:
    
 .data
 format_str:             .asciz    "%d"
-@prompt_str:             .ascii    "Enter a number and press result key: "
+prompt_str:             .ascii    "Enter a number and press result key: "
 printf_str:             .asciz    "Therefore, %d with %d and %d\n"
-@exit_str:				.ascii 	  "Terminating program.\n"
+exit_str:				.ascii 	  "Terminating program.\n"
