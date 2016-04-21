@@ -36,38 +36,38 @@ _scanf:
   MOV PC, R4
   
 _fact:
-  PUSH {LR}
-  CMP R1, #0
-  MOVEQ R0, #1
-  POPEQ {PC}
-  
-  CMP R1, #0
-  MOVLT R0, #0
-  POPLT {PC}
-  
-  CMP R2, #0
-  MOVEQ R0, #0
-  POPEQ {PC}
-  
-  PUSH {R1}
-  PUSH {R2}
-  SUB R1, R2, #1
-  BL _fact
-  MOV R6, R0
-  POP {R2}
-  POP {R1}
-  
-  PUSH {R1}
-  PUSH {R2}
-  PUSH {R6}
-  SUB R1, R1, R2
-  BL _fact
-  POP {R6}
-  POP {R2}
-  POP {R1}
-  ADD R6, R6, R0
-  MOV R0, R6
-  POP {PC}
+  PUSH {LR}				@ store the return address
+	CMP R1, #0				@ if (n == 0)
+	MOVEQ R0, #1				@ R0 = 1
+	POPEQ {PC}				@ return R0
+
+	CMP R1, #0				@ else if (n<0)
+	MOVLT R0, #0				@ R0 = 0
+	POPLT {PC}				@ return R0
+
+	CMP R2, #0				@ else if (m == 0)
+	MOVEQ R0, #0				@ R0 = 0
+	POPEQ {PC}				@ return R0
+
+	@ For Recursion
+	PUSH {R1}				@ backup input argument value, n
+	PUSH {R2}				@ backup input argument value, m
+	SUB R2, R2, #1				@ (m-1) into R2
+	BL count_partitions			@ compute count_partitions(n,m-1)
+	MOV R11, R0				@ store the result in R11
+	POP {R2}				@ restore the input argument, m
+	POP {R1}				@ restore the input argument, n
+	PUSH {R1}				@ backup the input argument, n
+	PUSH {R2}				@ backup the input argument, m
+	PUSH {R11}				@ backup the result from count_partitions(n,m-1)
+	SUB R1, R1, R2				@ (n-m) into R1
+	BL count_partitions			@ compute count_partitions(n-m,m)
+	POP {R11}				@ restore the result from count_partitions(n,m-1)
+	POP {R2}				@ restore the input argument, m
+	POP {R1}				@ restore the input argument, n
+	ADD R11, R11, R0			@ compute count_partitions(n-m,m) + count_partitions(n,m-1)
+	MOV R0, R11				@ move the return result to R0
+	POP {PC}				@ restore the stack pointer and return
    
 .data
 format_str:             .asciz    "%d"
