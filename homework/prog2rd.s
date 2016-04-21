@@ -5,10 +5,12 @@ main:
   @BL _prompt                  @branch to _prompt with return                 
   BL _scanf                   @branch to _scanf with return
   MOV R4, R0                  @move return value R0 to R6
-  MOV R1, R0
+  MOV R8, R0
   BL _scanf
   MOV R5, R0
-  MOV R2, R0
+  MOV R9, R0
+  MOV R1, R8
+  MOV R2, R9
   BL _fact                  @branch to _prompt with return
   MOV R1, R0
   MOV R2, R4
