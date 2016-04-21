@@ -9,12 +9,12 @@ main:
   BL _scanf
   MOV R5, R0
   MOV R9, R0
-  MOV R1, R8
-  MOV R2, R9
+  MOV R1, R10
+  MOV R2, R5
   BL _fact                  @branch to _prompt with return
   MOV R1, R0
-  MOV R2, R10
-  MOV R3, R5
+  MOV R2, R8
+  MOV R3, R9
   BL _printf
   B main
   
@@ -48,14 +48,14 @@ _printf:
   POP {PC}
   
 _scanf:
-  PUSH {LR}
+  MOV R4, LR
   SUB SP, SP, #4
   LDR R0, =format_str
   MOV R1, SP
   BL scanf
   LDR R0, [SP]
   ADD SP, SP, #4
- POP {PC}
+  MOV PC, R4
   
 _fact:
   PUSH {LR}
@@ -64,7 +64,7 @@ _fact:
   POPEQ {PC}
   
   CMP R1, #0
-  MOVLT R0, #1
+  MOVLT R0, #0
   POPLT {PC}
   
   CMP R2, #0
