@@ -53,7 +53,7 @@ _fact:
 	PUSH {R1}				@ backup input argument value, n
 	PUSH {R2}				@ backup input argument value, m
 	SUB R2, R2, #1				@ (m-1) into R2
-	BL count_partitions			@ compute count_partitions(n,m-1)
+	BL _fact			@ compute count_partitions(n,m-1)
 	MOV R11, R0				@ store the result in R11
 	POP {R2}				@ restore the input argument, m
 	POP {R1}				@ restore the input argument, n
@@ -61,7 +61,7 @@ _fact:
 	PUSH {R2}				@ backup the input argument, m
 	PUSH {R11}				@ backup the result from count_partitions(n,m-1)
 	SUB R1, R1, R2				@ (n-m) into R1
-	BL count_partitions			@ compute count_partitions(n-m,m)
+	BL _fact			@ compute count_partitions(n-m,m)
 	POP {R11}				@ restore the result from count_partitions(n,m-1)
 	POP {R2}				@ restore the input argument, m
 	POP {R1}				@ restore the input argument, n
