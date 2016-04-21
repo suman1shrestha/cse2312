@@ -41,6 +41,7 @@ _fact:
   MOVEQ R0, #1
   POPEQ {PC}
   
+  prompt_str
   CMP R1, #0
   MOVLT R0, #0
   POPLT {PC}
