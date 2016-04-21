@@ -51,7 +51,7 @@ _fact:
   
   PUSH {R1}
   PUSH {R2}
-  SUB R1, R2, #1
+  SUB R2, R2, #1
   BL _fact
   MOV R6, R0
   POP {R2}
