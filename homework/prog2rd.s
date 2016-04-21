@@ -79,7 +79,7 @@ _fact:
   PUSH {R2}
   SUB R1, R2, #1
   BL _fact
-  MOV R7, R0
+  MOV R6, R0
   POP {R2}
   POP {R1}
   
@@ -89,8 +89,8 @@ _fact:
   BL _fact
   POP {R2}
   POP {R1}
-  ADD R7, R7, R0
-  MOV R0, R7
+  ADD R6, R6, R0
+  MOV R0, R6
   POP {PC}
    
 .data
