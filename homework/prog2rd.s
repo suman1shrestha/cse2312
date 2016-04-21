@@ -18,6 +18,28 @@ main:
   BL _printf
   B main
   
+_prompt:               
+  PUSH {R1}
+  PUSH {R2}
+  PUSH {R7}
+  MOV R7, #4                  @write syscall, 4            
+  MOV R0, #1                  @output stream to monitor, 1
+  MOV R2, #37                 @print string length
+  LDR R1, =prompt_str     
+  SWI 0                       @execute syscall    
+  POP {R7}
+  POP {R2}
+  POP {R1}
+  MOV PC, LR                  @return  
+  
+  _exit:
+  MOV R7, #4
+  MOV R0, #1
+  MOV R2, #21
+  LDR R1, = exit_str
+  SWI 0
+  MOV R7, #1
+  SWI 0
 
 _printf:
   PUSH {LR}
