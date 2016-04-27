@@ -27,8 +27,8 @@ generate:
     ADD R2, R1, R2          @ R2 now has the element address
     ADD R5, R3, R0
     STR R5, [R2]              @ write the address of a[i] to a[i]
-    ADD R4, R0, #1
-    ADD R6, R3, R4
+    ADD R11, R0, #1
+    ADD R6, R3, R11
     MOV R8, #0
     SUB R6, R8, R6
     ADD R2, R2, #4
