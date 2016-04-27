@@ -29,8 +29,8 @@ generate:
     STR R2, [R5]              @ write the address of a[i] to a[i]
     ADD R4, R0, #1
     ADD R6, R3, R4
-    MOV R7, #0
-    SUB R6, R7, R6
+    MOV R8, #0
+    SUB R6, R8, R6
     ADD R2, R2, #4
     STR R2, [R6]
     ADD R0, R0, #2          @ increment index
@@ -39,8 +39,8 @@ generatedone:
     MOV R0, #0              @ initialze index variable
 _sort:
     PUSH {LR}	
-    CMP R0, #20            @ check to see if we are done iterating
-    BEQ _sortdone            @ exit loop if done
+    CMP R0, #20             @ check to see if we are done iterating
+    BEQ _sortdone           @ exit loop if done
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
