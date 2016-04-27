@@ -37,7 +37,8 @@ generate:
     B generate              @ branch to next loop iteration
 generatedone:
     MOV R0, #0              @ initialze index variable
-    
+    MOV R5, #300
+    MOV R10, #0
 _sort:
     CMP R0, #20            @ condition to stop
     MOVEQ R0, #0            @ reset R0 back to zero after finding the first lowest integer
