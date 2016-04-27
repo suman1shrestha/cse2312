@@ -43,11 +43,11 @@ generatedone:
 _sort:
     CMP R0, #20            @ condition to stop
     MOVEQ R0, #0            @ reset R0 back to zero after finding the first lowest integer
-    LDR R1, =a_array            @ load a_array
+    LDR R1, =a           @ load a_array
     LSL R2, R0, #2            @ set the address
     ADD R2, R1, R2            @ add a_array address to R2
     LDR R1, [R2]            @ load contents of a_array into R1
-    LDR R3, =b_array            @ load b_array
+    LDR R3, =b            @ load b_array
     LSL R4, R10, #2            @ set the address
     ADD R4, R3, R4            @ add b_array address to R4
     CMP R5, R1            @ compare R5 to R1
@@ -119,8 +119,7 @@ _printf:
 
 .balign 4
 a:              .skip       400
-a_array:	.skip		400
-b_array:	.skip		400
+b:	.skip		400
 format_str:		  .asciz		  "%d"
 printf_str:     .asciz      "array_a[%d] = %d, array_b = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
