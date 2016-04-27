@@ -37,7 +37,34 @@ generate:
     B generate              @ branch to next loop iteration
 generatedone:
     MOV R0, #0              @ initialze index variable
-   
+    MOV R5, #300
+    MOV R10, #0
+    
+_sort:
+    CMP R0, #20            @ condition to stop
+    MOVEQ R0, #0            @ reset R0 back to zero after finding the first lowest integer
+    LDR R1, =a_array            @ load a_array
+    LSL R2, R0, #2            @ set the address
+    ADD R2, R1, R2            @ add a_array address to R2
+    LDR R1, [R2]            @ load contents of a_array into R1
+    LDR R3, =b_array            @ load b_array
+    LSL R4, R10, #2            @ set the address
+    ADD R4, R3, R4            @ add b_array address to R4
+    CMP R5, R1            @ compare R5 to R1
+    MOVGT R5, R1            @ if R5 is greater than R1, move the contents of R1 into R5
+    ADDGT R0, R0, #1            @ increment counter
+    BGT _sort            @ re-enter the sort function
+    CMP R5, R1            @ compare R5 to R1
+    ADDLT R0, R0, #1            @ increment the counter if R5 is less than R1
+    BLT _sort            @ re-enter the sort function
+    CMP R10, #20            @ compare R10 with 20
+    BEQ sortDone            @ if R10 is equal to 20 exit the sort function
+    ADD R10, R10, #1            @ increment R10 by one
+    STR R5, [R4]            @ store the contents of R5 into b_array
+    B _sort            @ re-enter sort function
+    
+sortDone:
+    MOV R0, #0    
 
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
