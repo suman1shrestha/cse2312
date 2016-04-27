@@ -37,7 +37,7 @@ generate:
     B generate              @ branch to next loop iteration
 generatedone:
     MOV R0, #0              @ initialze index variable
-    MOV R5, #300
+    MOV R5, #900
     MOV R10, #0
 _sort:
     CMP R0, #20            @ condition to stop
@@ -57,10 +57,13 @@ _sort:
     ADDLT R0, R0, #1            @ increment the counter if R5 is less than R1
     BLT _sort            @ re-enter the sort function
     CMP R10, #20            @ compare R10 with 20
-    BEQ generatedone            @ if R10 is equal to 20 exit the sort function
+    BEQ sortDone            @ if R10 is equal to 20 exit the sort function
     ADD R10, R10, #1            @ increment R10 by one
     STR R5, [R4]            @ store the contents of R5 into b_array
     B _sort
+    
+sortDone:
+    MOV R0, #0
 
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
