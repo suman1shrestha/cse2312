@@ -51,12 +51,12 @@ _sort:
     CMP R5, R1            @ compare R5 to R1
     MOVGT R5, R1            @ if R5 is greater than R1, move the contents of R1 into R5
     ADDGT R0, R0, #1            @ increment counter
-    BGT _sort_ascending            @ re-enter the sort function
+    BGT _sort            @ re-enter the sort function
     CMP R5, R1            @ compare R5 to R1
     ADDLT R0, R0, #1            @ increment the counter if R5 is less than R1
     BLT _sort            @ re-enter the sort function
     CMP R10, #20            @ compare R10 with 20
-    BEQ writedone_1            @ if R10 is equal to 20 exit the sort function
+    BEQ generatedone            @ if R10 is equal to 20 exit the sort function
     ADD R10, R10, #1            @ increment R10 by one
     STR R5, [R4]            @ store the contents of R5 into b_array
 
@@ -113,6 +113,8 @@ _printf:
 
 .balign 4
 a:              .skip       400
+a_array:	.skip		400
+b_array:	.skip		400
 format_str:		  .asciz		  "%d"
 printf_str:     .asciz      "array_a[%d] = %d, array_b = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
