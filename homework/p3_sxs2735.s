@@ -59,7 +59,7 @@ readLoop:
     POP {R1}                @ restore register
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
-    B   _sort            @ branch to next loop iteration
+    B   readLoop            @ branch to next loop iteration
 readLoopdone:
     B _exit                 @ exit if done
     
