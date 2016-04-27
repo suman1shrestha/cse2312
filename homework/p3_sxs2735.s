@@ -88,5 +88,5 @@ _printf:
 .balign 4
 a:              .skip       400
 format_str:		  .asciz		  "%d"
-printf_str:     .asciz      "a[%d] = %d\n"
+printf_str:     .asciz      "array_a[%d] = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
