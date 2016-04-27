@@ -37,25 +37,51 @@ generate:
     B generate              @ branch to next loop iteration
 generatedone:
     MOV R0, #0              @ initialze index variable
+    
 _sort:
+    CMP R0, #20            @ condition to stop
+    MOVEQ R0, #0            @ reset R0 back to zero after finding the first lowest integer
+    LDR R1, =a_array            @ load a_array
+    LSL R2, R0, #2            @ set the address
+    ADD R2, R1, R2            @ add a_array address to R2
+    LDR R1, [R2]            @ load contents of a_array into R1
+    LDR R3, =b_array            @ load b_array
+    LSL R4, R10, #2            @ set the address
+    ADD R4, R3, R4            @ add b_array address to R4
+    CMP R5, R1            @ compare R5 to R1
+    MOVGT R5, R1            @ if R5 is greater than R1, move the contents of R1 into R5
+    ADDGT R0, R0, #1            @ increment counter
+    BGT _sort_ascending            @ re-enter the sort function
+    CMP R5, R1            @ compare R5 to R1
+    ADDLT R0, R0, #1            @ increment the counter if R5 is less than R1
+    BLT _sort            @ re-enter the sort function
+    CMP R10, #20            @ compare R10 with 20
+    BEQ writedone_1            @ if R10 is equal to 20 exit the sort function
+    ADD R10, R10, #1            @ increment R10 by one
+    STR R5, [R4]            @ store the contents of R5 into b_array
+
+readLoop:
     CMP R0, #20             @ check to see if we are done iterating
-    BEQ _sortdone           @ exit loop if done
+    BEQ readLoopdone           @ exit loop if done
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address 
+    LDR R3, [R4]
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
-    PUSH {R2}               @ backup register before printf
+    PUSH {R2}   
+    PUSH {R3}		@ backup register before printf
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
-    BL  _printf             @ branch to print procedure with return
+    BL  _printf 
+    POP {R3}		@ branch to print procedure with return
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
     B   _sort            @ branch to next loop iteration
-_sortdone:
+readLoopdone:
     B _exit                 @ exit if done
     
 _scanf:
