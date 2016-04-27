@@ -38,7 +38,6 @@ generate:
 generatedone:
     MOV R0, #0              @ initialze index variable
 _sort:
-    PUSH {LR}	
     CMP R0, #20             @ check to see if we are done iterating
     BEQ _sortdone           @ exit loop if done
     LDR R1, =a              @ get address of a
@@ -56,7 +55,6 @@ _sort:
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
     B   _sort            @ branch to next loop iteration
-    POP {PC}
 _sortdone:
     B _exit                 @ exit if done
     
