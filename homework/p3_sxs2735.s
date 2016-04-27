@@ -60,6 +60,7 @@ _sort:
     BEQ generatedone            @ if R10 is equal to 20 exit the sort function
     ADD R10, R10, #1            @ increment R10 by one
     STR R5, [R4]            @ store the contents of R5 into b_array
+    B _sort
 
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
