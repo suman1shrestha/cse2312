@@ -26,7 +26,7 @@ generate:
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     ADD R12, R3, R0
-    STR R12, [R2]              @ write the address of a[i] to a[i]
+    STR R12, [R2]           @ write the address of a[i] to a[i]
     ADD R11, R0, #1
     ADD R6, R3, R11
     MOV R8, #0
@@ -41,34 +41,34 @@ generatedone:
     MOV R10, #0
     
 _sort:
-    CMP R0, #20            @ condition to stop
-    MOVEQ R0, #0            @ reset R0 back to zero after finding the first lowest integer
-    LDR R1, =a           @ load a_array
-    LSL R2, R0, #2            @ set the address
-    ADD R2, R1, R2            @ add a_array address to R2
-    LDR R1, [R2]            @ load contents of a_array into R1
-    LDR R3, =b            @ load b_array
-    LSL R4, R10, #2            @ set the address
-    ADD R4, R3, R4            @ add b_array address to R4
-    CMP R5, R1            @ compare R5 to R1
-    MOVGT R5, R1            @ if R5 is greater than R1, move the contents of R1 into R5
-    ADDGT R0, R0, #1            @ increment counter
-    BGT _sort            @ re-enter the sort function
-    CMP R5, R1            @ compare R5 to R1
-    ADDLT R0, R0, #1            @ increment the counter if R5 is less than R1
-    BLT _sort            @ re-enter the sort function
-    CMP R10, #20            @ compare R10 with 20
-    BEQ sortDone            @ if R10 is equal to 20 exit the sort function
-    ADD R10, R10, #1            @ increment R10 by one
-    STR R5, [R4]            @ store the contents of R5 into b_array
-    B _sort            @ re-enter sort function
+    CMP R0, #20           
+    MOVEQ R0, #0           
+    LDR R1, =a           
+    LSL R2, R0, #2           
+    ADD R2, R1, R2           
+    LDR R1, [R2]            @ load contents of a into R1
+    LDR R3, =b              @ load b
+    LSL R4, R10, #2         @ set the address
+    ADD R4, R3, R4          @ add b address to R4
+    CMP R5, R1              @ compare R5 to R1
+    MOVGT R5, R1            @ if R5 is greater than R1, move R1 into R5
+    ADDGT R0, R0, #1        @ increment counter
+    BGT _sort           
+    CMP R5, R1              @ compare R5 to R1
+    ADDLT R0, R0, #1        @ increment the counter 
+    BLT _sort           
+    CMP R10, #20           
+    BEQ sortDone           
+    ADD R10, R10, #1        @ increment R10 by 1
+    STR R5, [R4]            @ store the contents of R5 into b
+    B _sort            
     
 sortDone:
     MOV R0, #0    
 
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
-    BEQ readLoopdone           @ exit loop if done
+    BEQ readLoopdone        @ exit loop if done
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
@@ -77,12 +77,12 @@ readLoop:
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
     PUSH {R2}   
-    PUSH {R3}		@ backup register before printf
+    PUSH {R3}		    @ backup register before printf
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
     MOV R3, R12
     BL  _printf 
-    POP {R3}		@ branch to print procedure with return
+    POP {R3}		    @ branch to print procedure with return
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
@@ -120,7 +120,7 @@ _printf:
 
 .balign 4
 a:              .skip       400
-b:	.skip		400
-format_str:		  .asciz		  "%d"
+b:	.skip		    400
+format_str:		    .asciz		  "%d"
 printf_str:     .asciz      "array_a[%d] = %d, array_b = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
