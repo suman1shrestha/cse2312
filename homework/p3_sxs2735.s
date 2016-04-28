@@ -37,7 +37,7 @@ generate:
     B generate              @ branch to next loop iteration
 generatedone:
     MOV R0, #0              @ initialze index variable
-    MOV R5, #300
+    MOV R5, #900
     MOV R10, #0
     
 _sort:
@@ -65,33 +65,32 @@ _sort:
     
 sortDone:
     MOV R0, #0    
-    MOV R13, #0
+   
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
     BEQ readLoopdone        @ exit loop if done
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
-    LDR R12, =b
-    LSL R4, R13, #2
-    ADD R4, R12, R4
+    LDR R3, =b              @ load b
+    LSL R4, R10, #2         @ set the address
+    ADD R4, R3, R4 
     LDR R1, [R2]            @ read the array at address 
-    LDR R12, [R4]
+    LDR R3, [R4]
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
     PUSH {R2}   
-    PUSH {R12}		    @ backup register before printf
-    MOV R3, R12
+    PUSH {R3}		    @ backup register before printf
+    @MOV R3, R12
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
     
     BL  _printf 
-    POP {R12}		    @ branch to print procedure with return
+    POP {R3}		    @ branch to print procedure with return
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
-    ADD R13, R13, #1
     B   readLoop            @ branch to next loop iteration
 readLoopdone:
     B _exit                 @ exit if done
