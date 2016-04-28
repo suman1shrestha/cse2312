@@ -73,6 +73,8 @@ readLoop:
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R12, =b
+    LSL R4, R0, #2
+    ADD R4, R12, R4
     LDR R1, [R2]            @ read the array at address 
     LDR R12, [R4]
     PUSH {R0}               @ backup register before printf
