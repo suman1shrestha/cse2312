@@ -62,7 +62,7 @@ _sort:
     ADDGT R0, R0, #1        @ increment counter
     @ADDGT R6, R6, #1
     BGT _sort           
-    CMP R5, R1              @ compare R5 to R1
+    @CMP R5, R1              @ compare R5 to R1
     ADDLT R0, R0, #1        @ increment the counter 
     @ADDLT R6, R6, #1
     BLT _sort           
