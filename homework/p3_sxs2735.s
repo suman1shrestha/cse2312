@@ -80,13 +80,13 @@ readLoop:
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
     PUSH {R2}   
-    PUSH {R3}		    @ backup register before printf
+    PUSH {R12}		    @ backup register before printf
     MOV R3, R12
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
     
     BL  _printf 
-    POP {R3}		    @ branch to print procedure with return
+    POP {R12}		    @ branch to print procedure with return
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
