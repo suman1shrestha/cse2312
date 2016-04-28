@@ -58,9 +58,11 @@ _sort:
     MOVGT R5, R1            @ if R5 is greater than R1, move R1 into R5
     MOVGT R1, R8
     ADDGT R0, R0, #1        @ increment counter
+    ADDGT R6, R6, #1
     BGT _sort           
     CMP R5, R1              @ compare R5 to R1
     ADDLT R0, R0, #1        @ increment the counter 
+    ADDLT R6, R6, #1
     BLT _sort           
     CMP R10, #20           
     BEQ sortDone           
