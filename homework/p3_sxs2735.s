@@ -26,7 +26,7 @@ generate:
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     ADD R12, R3, R0
-    STR R12, [R2]           @ write the address of a[i] to a[i]
+    STR R12, [R2]           @ write the value of R12 to a[i]
     ADD R11, R0, #1
     ADD R6, R3, R11
     MOV R8, #0
@@ -37,23 +37,26 @@ generate:
     B generate              @ branch to next loop iteration
 generatedone:
     MOV R0, #0              @ initialze index variable
-    MOV R5, #900
+    MOV R6, #1
     MOV R10, #0
     
 _sort:
     CMP R0, #20           
     MOVEQ R0, R10           
     LDR R1, =a           
-    LSL R2, R0, #2           
-    ADD R2, R1, R2           
+    LSL R2, R0, #2     
+    ADD R2, R1, R2     
+    LSL R13, R6, #2
+    ADD R13, R1, R13
     LDR R1, [R2]            @ load contents of a into R1
+    LDR R5, [R13]
     LDR R3, =b              @ load b
     LSL R4, R10, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
     CMP R5, R1              @ compare R5 to R1
-    MOVGT R13, R5
+    MOVGT R8, R5
     MOVGT R5, R1            @ if R5 is greater than R1, move R1 into R5
-    MOVGT R1, R13
+    MOVGT R1, R8
     ADDGT R0, R0, #1        @ increment counter
     BGT _sort           
     CMP R5, R1              @ compare R5 to R1
