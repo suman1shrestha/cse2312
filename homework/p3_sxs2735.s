@@ -55,7 +55,7 @@ _sort:
     LDR R3, =b              @ load b
     LSL R4, R10, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
-    CMP R1, R5              @ compare R5 to R1
+    CMP R5, R1              @ compare R5 to R1
     MOVGT R8, R5
     MOVGT R5, R1            @ if R5 is greater than R1, move R1 into R5
     MOVGT R1, R8
