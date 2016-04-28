@@ -55,14 +55,14 @@ _sort:
     LDR R3, =b              @ load b
     LSL R4, R10, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
-    CMP R5, R1              @ compare R5 to R1
+    CMP R1, R5              @ compare R5 to R1
     MOVGT R8, R5
     MOVGT R5, R1            @ if R5 is greater than R1, move R1 into R5
     MOVGT R1, R8
     ADDGT R0, R0, #1        @ increment counter
     @ADDGT R6, R6, #1
     BGT _sort           
-    CMP R5, R1              @ compare R5 to R1
+    CMP R1, R5              @ compare R5 to R1
     ADDLT R0, R0, #1        @ increment the counter 
     @ADDLT R6, R6, #1
     BLT _sort           
