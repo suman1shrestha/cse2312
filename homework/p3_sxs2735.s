@@ -37,12 +37,13 @@ generate:
     B generate              @ branch to next loop iteration
 generatedone:
     MOV R0, #0              @ initialze index variable
-    MOV R6, #1
+    MOV R6, #0
     MOV R10, #0
     
 _sort:
     CMP R0, #20           
-    MOVEQ R0, R10           
+    MOVEQ R0, R10  
+    ADDEQ R6, R0, #1
     LDR R1, =a           
     LSL R2, R0, #2     
     ADD R2, R1, R2     
