@@ -65,7 +65,7 @@ _sort:
     
 sortDone:
     MOV R0, #0    
-
+    MOV R13, #0
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
     BEQ readLoopdone        @ exit loop if done
@@ -73,7 +73,7 @@ readLoop:
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R12, =b
-    LSL R4, R0, #2
+    LSL R4, R13, #2
     ADD R4, R12, R4
     LDR R1, [R2]            @ read the array at address 
     LDR R12, [R4]
@@ -91,6 +91,7 @@ readLoop:
     POP {R1}                @ restore register
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
+    ADD R13, R13, #1
     B   readLoop            @ branch to next loop iteration
 readLoopdone:
     B _exit                 @ exit if done
