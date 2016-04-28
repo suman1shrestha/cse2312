@@ -72,13 +72,14 @@ readLoop:
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
+    LDR R12, =b
     LDR R1, [R2]            @ read the array at address 
-    LDR R2, [R4]
+    LDR R12, [R4]
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
     PUSH {R2}   
     PUSH {R3}		    @ backup register before printf
-    MOV R3, R2
+    MOV R3, R12
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
     
