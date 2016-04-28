@@ -42,7 +42,7 @@ generatedone:
     
 _sort:
     CMP R0, #20           
-    MOVEQ R0, #0           
+    MOVEQ R0, R10           
     LDR R1, =a           
     LSL R2, R0, #2           
     ADD R2, R1, R2           
