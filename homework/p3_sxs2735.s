@@ -44,11 +44,12 @@ _sort:
     CMP R0, #20           
     MOVEQ R0, R10  
     ADD R6, R0, #1
-    LDR R1, =a           
+    LDR R1, =a    
+    LDR R5, =a
     LSL R2, R0, #2     
     ADD R2, R1, R2     
     LSL R13, R6, #2
-    ADD R13, R1, R13
+    ADD R13, R5, R13
     LDR R1, [R2]            @ load contents of a into R1
     LDR R5, [R13]
     LDR R3, =b              @ load b
