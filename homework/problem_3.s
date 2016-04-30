@@ -64,8 +64,8 @@ _sort:
     CMP R0, #20 
     BEQ sortDone 
     MOV R6, R0
-    LDR R1, =a  
-    LSL R2, R10, #2     
+    LDR R1, =b  
+    LSL R2, R0, #2     
     ADD R2, R1, R2 
     LDR R1, [R2]            @ load contents of a into R1
     MOV R8, R1
