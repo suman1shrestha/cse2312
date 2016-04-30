@@ -49,51 +49,50 @@ _copy:
     LDR R3, =b              @ get address of b
     LSL R4, R0, #2          @ multiply index*4 to get array offset
     ADD R4, R3, R4          @ R4 now has the element address
-    @MOV R5, R1
-    ADD R0, R0, #1        @ increment the counter 
-    STR R1, [R4]            @ store the contents of R5 into b
-    B _copy           
+    ADD R0, R0, #1          @ increment the counter 
+    STR R1, [R4]            @ store the contents of R1 into b
+    B _copy           	    @ branch to next loop iteration
     
 copyDone:
-    MOV R0, #0    
-    MOV R10, #0
+    MOV R0, #0    	    @ initialze index variable, i
+    @MOV R10, #0		    @ initialze index variable, j
     
 _sort:
-    CMP R0, #20 
-    BEQ sortDone 
-    MOV R6, R0
-    LDR R1, =b  
-    LSL R2, R0, #2     
-    ADD R2, R1, R2 
-    LDR R1, [R2]            @ load contents of a into R1
-    MOV R8, R1
+    CMP R0, #20  	    @ check to see if we are done iterating	
+    BEQ sortDone 	    @ branch to sortDone procedure
+    MOV R6, R0		    @ initialze index variable, j = i
+    LDR R1, =b  	    @ get address of b
+    LSL R2, R0, #2          @ multiply index*4 to get array offset
+    ADD R2, R1, R2 	    @ R2 now has the element address
+    LDR R1, [R2]            @ load contents of b into R1
+    MOV R8, R1		    @ get the value of b[i] to R8
     
 _sorting:
-    CMP R6, #20
-    BEQ _sorted
-    LDR R1, =b
-    LSL R2, R6, #2     
-    ADD R2, R1, R2 
-    LDR R1, [R2]
-    CMP R1, R8
-    BLT _swap
-    ADD R6, R6, #1
-    B _sorting
+    CMP R6, #20		    @ check to see if we are done iterating inner loop with variable j
+    BEQ _sorted		    @ branch to sorted procedure
+    LDR R1, =b		    @ get address of b
+    LSL R2, R6, #2          @ multiply index*4 to get array offset
+    ADD R2, R1, R2 	    @ R2 now has the element address, b[j]
+    LDR R1, [R2]	    @ load contents of b[j] into R1
+    CMP R1, R8		    @ compare the value at b[j] with b[i]
+    BLT _swap		    @ branch to swap procedure if b[j] is smaller
+    ADD R6, R6, #1	    @ increment the counter, j=j+1
+    B _sorting		    @ branch to sorting procedure
     
 _swap:
-    LDR R3, =b              @ load b
-    LSL R4, R0, #2          @ set the address
-    ADD R4, R3, R4          @ add b address to R4
-    STR R8, [R2]
-    STR R1, [R4]            @ store the contents of R5 into b
+    LDR R3, =b              @ get address of b
+    LSL R4, R0, #2          @ multiply index*4 to get array offset
+    ADD R4, R3, R4          @ R4 now has the element address, b[i]
+    STR R8, [R2]	    @ Store the value at b[j] into b[i]
+    STR R1, [R4]            @ Store the value at b[i] into b[j]
     B _sort
     
 _sorted:
-    ADD R0, R0, #1         @ increment the counter 
-    B _sort           
+    ADD R0, R0, #1          @ increment the counter, i=i+1
+    B _sort                 @ branch to sort procedure
     
 sortDone:
-    MOV R0, #0 
+    MOV R0, #0 		    @ initialze index variable
    
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
@@ -103,12 +102,12 @@ readLoop:
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R3, =b              @ load b
     LSL R4, R0, #2          @ set the address
-    ADD R4, R3, R4 
-    LDR R1, [R2]            @ read the array at address 
-    LDR R3, [R4]
+    ADD R4, R3, R4 	    @ R4 now has the element address for b
+    LDR R1, [R2]            @ read the value of array a at address 
+    LDR R3, [R4]	    @ read the value of array b at address 
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
-    PUSH {R2}   
+    PUSH {R2}   	    @ backup register before printf
     PUSH {R3}		    @ backup register before printf
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
