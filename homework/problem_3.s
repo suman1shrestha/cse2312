@@ -75,7 +75,7 @@ _sorted:
     LDR R3, =b              @ load b
     LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
-    STR #2, [R2]
+    @STR R1, [R2]
     STR R8, [R4]            @ store the contents of R5 into b
     ADD R0, R0, #1        @ increment the counter 
     B _sort           
