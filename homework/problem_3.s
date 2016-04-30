@@ -39,6 +39,10 @@ generatedone:
     MOV R0, #1              @ initialze index variable
    @ MOV R6, #0
     MOV R10, #0
+    LDR R1, =a  
+    LSL R7, R0, #2
+    ADD R7, R1, R7
+    LDR R8, [R7]
     
 _sort:
     CMP R0, #20
@@ -49,10 +53,10 @@ _sort:
     LDR R1, =a  
     LSL R2, R10, #2     
     ADD R2, R1, R2   
-    LSL R7, R0, #2
-    ADD R7, R1, R7
+   @ LSL R7, R0, #2
+    @ADD R7, R1, R7
     LDR R1, [R2]            @ load contents of a into R1
-    LDR R8, [R7]
+    @LDR R8, [R7]
     CMP R8, R1
     MOVLT R5, R1
     MOVLT R1, R8
