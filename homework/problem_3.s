@@ -58,6 +58,29 @@ _copy:
     
 copyDone:
     MOV R0, #0    
+    
+_sort:
+    CMP R0, #20
+    BEQ sortDone
+    MOVEQ R6, R0
+    LDR R3, =b
+    LSL R4, R0, #2
+    ADD R4, R3, R4
+    LDR R3, [R4]
+    LSL R7, R6, #2
+    ADD R7, R3, R7
+    LDR R8, [R7]
+    CMP R8, R3
+    BLT _swap
+    ADD R0, R0, #1
+    B _sort
+
+_swap:
+    MOV R5, R3
+    STR R8, [R4]
+    STR R3, [R7]
+    B _sort
+    
    
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
