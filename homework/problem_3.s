@@ -61,7 +61,7 @@ _sorting:
     LDR R1, [R2]
     
     CMP R1, R8
-    BNEQ _swap
+    BNE _swap
     ADD R6, R6, #1
     B _sorting
     
