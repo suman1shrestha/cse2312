@@ -39,10 +39,6 @@ generatedone:
     MOV R0, #0              @ initialze index variable
    @ MOV R6, #0
     MOV R10, #0
-    LDR R1, =a  
-    LSL R2, R0, #2     
-    ADD R2, R1, R2 
-    MOV R8, R1
     
 _sort:
     CMP R10, #20
@@ -63,7 +59,7 @@ _sort:
     B _sort
     MOV R6, R1
     LDR R3, =b              @ load b
-    LSL R4, R0, #2         @ set the address
+    LSL R4, R0, #2          @ set the address
     ADD R4, R3, R4          @ add b address to R4
     ADD R10, R10, #1        @ increment the counter 
     MOV R0, R10
