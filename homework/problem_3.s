@@ -45,15 +45,22 @@ _sort:
     BEQ sortDone 
     ADD R6, R0, #1
     LDR R1, =a  
-    LSL R2, R6, #2     
-    ADD R2, R1, R2     
+    LSL R2, R0, #2     
+    ADD R2, R1, R2   
+    LSL R7, R6, #2
+    ADD R7, R1, R7
     LDR R1, [R2]            @ load contents of a into R1
+    LDR R8, [R7]
+    CMP R8, R1
+    MOVLT R5, R1
+    MOVLT R1, R8
+    MOVLT R8, R5
     LDR R3, =b              @ load b
     LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
-    MOV R5, R1
+    @MOV R5, R1
     ADD R0, R0, #1        @ increment the counter 
-    STR R5, [R4]            @ store the contents of R5 into b
+    STR R1, [R4]            @ store the contents of R5 into b
     B _sort            
     
 sortDone:
