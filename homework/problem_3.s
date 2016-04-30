@@ -36,11 +36,13 @@ generate:
     ADD R0, R0, #2          @ increment index
     B generate              @ branch to next loop iteration
 generatedone:
-    MOV R0, #0              @ initialze index variable
+    MOV R0, #1              @ initialze index variable
    @ MOV R6, #0
     MOV R10, #0
     
 _sort:
+    CMP R0, #20
+    MOVEQ R0, R10
     CMP R10, #20
     BEQ sortDone 
     @ADD R6, R0, #1
@@ -62,7 +64,6 @@ _sort:
     LSL R4, R0, #2          @ set the address
     ADD R4, R3, R4          @ add b address to R4
     ADD R10, R10, #1        @ increment the counter 
-    MOV R0, R10
     STR R6, [R4]            @ store the contents of R5 into b
     B _sort            
     
