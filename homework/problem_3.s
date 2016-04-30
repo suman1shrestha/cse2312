@@ -82,10 +82,10 @@ _sorting:
     ADDEQ R6, R6, #1
     BEQ _sorting
     
-    CMP R1, R8
-    MOVLT R5, R8
-    MOVLT R8, R1
-    MOVLT R1, R5
+    CMP R8, R1
+    MOVLT R5, R1
+    MOVLT R1, R8
+    MOVLT R8, R5
     ADD R6, R6, #1
     B _sorting
     
