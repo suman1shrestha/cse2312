@@ -45,33 +45,26 @@ generatedone:
     LDR R8, [R7]
     
 _sort:
-    CMP R0, #20
-    BEQ _sorted
-    CMP R10, #20
+    CMP R0, #20           
     BEQ sortDone 
-    @ADD R6, R0, #1
+    ADD R6, R0, #1
     LDR R1, =a  
-    LSL R2, R10, #2     
+    LSL R2, R0, #2     
     ADD R2, R1, R2   
-   @ LSL R7, R0, #2
-    @ADD R7, R1, R7
+    LSL R7, R6, #2
+    ADD R7, R1, R7
     LDR R1, [R2]            @ load contents of a into R1
-    @LDR R8, [R7]
+    LDR R8, [R7]
     CMP R8, R1
     MOVLT R5, R1
     MOVLT R1, R8
     MOVLT R8, R5
-    ADD R0, R0, #1
-    B _sort
-  
-_sorted:
-    MOV R6, R1
     LDR R3, =b              @ load b
-    LSL R4, R0, #2          @ set the address
+    LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
-    ADD R10, R10, #1        @ increment the counter 
-    STR R6, [R4]            @ store the contents of R5 into b
-    MOV R0, R10
+    @MOV R5, R1
+    ADD R0, R0, #1        @ increment the counter 
+    STR R1, [R4]            @ store the contents of R5 into b
     B _sort            
     
 sortDone:
