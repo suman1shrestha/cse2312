@@ -81,6 +81,8 @@ _swap:
     STR R3, [R7]
     B _sort
     
+_sortDone:
+    MOV R0, #0 
    
 readLoop:
     CMP R0, #20             @ check to see if we are done iterating
