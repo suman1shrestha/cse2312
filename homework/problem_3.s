@@ -42,10 +42,9 @@ generatedone:
     
 _sort:
     CMP R0, #20
-    BEQ sortDone
-    MOV R10, R0
-    CMP R10, #20
+    
     BEQ _sorted
+    ADD R10, R0, #1
     LDR R1, =a 
     LDR R6, =a
     LSL R2, R0, #2     
@@ -54,14 +53,8 @@ _sort:
     ADD R7, R6, R7
     LDR R6, [R7]
     LDR R1, [R2]            @ load contents of a into R1
-    CMP R6, R1
-    MOVLT R5, R1
-    MOVLT R1, R6
-    MOVLT R6, R5
-    ADD R10, R10, #1
-    B _sort
-    
-_sorted:
+   
+   
     LDR R3, =b              @ load b
     LSL R4, R0, #2          @ set the address
     ADD R4, R3, R4          @ add b address to R4
