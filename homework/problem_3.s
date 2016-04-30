@@ -79,9 +79,9 @@ _sorting:
     ADD R2, R1, R2 
     LDR R1, [R2]
     
-    CMP R1, R5
-    ADDEQ R6, R6, #1
-    BEQ _sorting
+    @CMP R1, R5
+    @ADDEQ R6, R6, #1
+    @BEQ _sorting
     
     CMP R1, R8
     BLT _sorted
