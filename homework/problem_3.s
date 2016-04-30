@@ -46,17 +46,18 @@ _sort:
     MOV R10, R0
     CMP R10, #20
     BEQ _sorted
-    LDR R1, =a  
+    LDR R1, =a 
+    LDR R6, =a
     LSL R2, R0, #2     
     ADD R2, R1, R2   
     LSL R7, R10, #2
     ADD R7, R1, R7
-    LDR R8, [R7]
+    LDR R6, [R7]
     LDR R1, [R2]            @ load contents of a into R1
-    CMP R8, R1
+    CMP R6, R1
     MOVLT R5, R1
-    MOVLT R1, R8
-    MOVLT R8, R5
+    MOVLT R1, R6
+    MOVLT R6, R5
     ADD R10, R10, #1
     B _sort
     
