@@ -55,7 +55,6 @@ _copy:
     
 copyDone:
     MOV R0, #0    	    @ initialze index variable, i
-    @MOV R10, #0		    @ initialze index variable, j
     
 _sort:
     CMP R0, #20  	    @ check to see if we are done iterating	
