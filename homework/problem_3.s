@@ -59,10 +59,10 @@ _sorting:
     ADD R2, R1, R2 
     LDR R1, [R2]
     
-    CMP R8, R1
-    MOVLT R5, R1
-    MOVLT R1, R8
-    MOVLT R8, R5
+    CMP R1, R8
+    MOVLT R5, R8
+    MOVLT R8, R1
+    MOVLT R1, R5
     ADD R6, R6, #1
     B _sorting
     
@@ -71,7 +71,7 @@ _sorted:
     LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
     ADD R0, R0, #1        @ increment the counter 
-    STR R1, [R4]            @ store the contents of R5 into b
+    STR R8, [R4]            @ store the contents of R5 into b
     B _sort           
     
 sortDone:
