@@ -48,16 +48,16 @@ _sort:
     LSL R2, R0, #2     
     ADD R2, R1, R2 
     LDR R1, [R2]            @ load contents of a into R1
-    @MOV R8, R1
+    MOV R8, R1
     @ADD R6, R0, #1
     
 _sorting:
     CMP R6, #20
     BEQ _sorted
-    LDR R8, =a
-    LSL R7, R6, #2     
-    ADD R7, R8, R7 
-    LDR R8, [R7]
+    LDR R1, =a
+    LSL R2, R6, #2     
+    ADD R2, R1, R2 
+    LDR R1, [R2]
     
     CMP R8, R1
     MOVLT R5, R1
