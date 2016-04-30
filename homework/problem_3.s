@@ -63,6 +63,8 @@ _sort:
     CMP R0, #20
     BEQ sortDone
     MOVEQ R6, R0
+    CMP R6, #20
+    BEQ sorted
     LDR R3, =b
     LSL R4, R0, #2
     ADD R4, R3, R4
@@ -72,13 +74,17 @@ _sort:
     LDR R8, [R7]
     CMP R8, R3
     BLT _swap
-    ADD R0, R0, #1
+    ADD R6, R6, #1
     B _sort
-
+    
 _swap:
     MOV R5, R3
     STR R8, [R4]
     STR R3, [R7]
+    B _sort
+    
+sorted:
+    ADD R0, R0, #1
     B _sort
     
 sortDone:
