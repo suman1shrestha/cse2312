@@ -75,8 +75,8 @@ _sorted:
     LDR R3, =b              @ load b
     LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
-    ADD R0, R0, #1        @ increment the counter 
     STR R8, [R4]            @ store the contents of R5 into b
+    ADD R0, R0, #1        @ increment the counter 
     B _sort           
     
 sortDone:
@@ -139,8 +139,8 @@ _printf:
 .data
 
 .balign 4
-a:              .skip       400
-b:	.skip		    400
+a:              .skip       80
+b:	.skip		    80
 format_str:		    .asciz		  "%d"
 printf_str:     .asciz      "array_a[%d] = %d, array_b = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
