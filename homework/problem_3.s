@@ -60,7 +60,7 @@ _sorting:
     ADD R2, R1, R2 
     LDR R1, [R2]
     
-    CMP R1, R8
+    CMP R1, R5
     ADDEQ R6, R6, #1
     BEQ _sorting
     
@@ -77,6 +77,7 @@ _sorted:
     ADD R4, R3, R4          @ add b address to R4
     @STR R1, [R2]
     STR R8, [R4]            @ store the contents of R5 into b
+    MOV R5, R8
     ADD R0, R0, #1        @ increment the counter 
     B _sort           
     
