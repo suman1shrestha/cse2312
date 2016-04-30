@@ -35,11 +35,9 @@ generate:
     STR R6, [R2]
     ADD R0, R0, #2          @ increment index
     B generate              @ branch to next loop iteration
+    
 generatedone:
     MOV R0, #0              @ initialze index variable
-   @ MOV R6, #0
-    @MOV R10, #0
-    
     
 _copy:
     CMP R0, #20           
@@ -69,7 +67,6 @@ _sort:
     ADD R2, R1, R2 
     LDR R1, [R2]            @ load contents of a into R1
     MOV R8, R1
-    @ADD R6, R0, #1
     
 _sorting:
     CMP R6, #20
@@ -78,30 +75,21 @@ _sorting:
     LSL R2, R6, #2     
     ADD R2, R1, R2 
     LDR R1, [R2]
-    
-    @CMP R1, R5
-    @ADDEQ R6, R6, #1
-    @BEQ _sorting
-    
     CMP R1, R8
     BLT _swap
-    @MOVLT R5, R8
-    @MOVLT R8, R1
-    @MOVLT R1, R5
     ADD R6, R6, #1
     B _sorting
     
 _swap:
     LDR R3, =b              @ load b
-    LSL R4, R0, #2         @ set the address
+    LSL R4, R0, #2          @ set the address
     ADD R4, R3, R4          @ add b address to R4
     STR R8, [R2]
     STR R1, [R4]            @ store the contents of R5 into b
-    MOV R5, R1
     B _sort
     
 _sorted:
-    ADD R0, R0, #1        @ increment the counter 
+    ADD R0, R0, #1         @ increment the counter 
     B _sort           
     
 sortDone:
@@ -114,7 +102,7 @@ readLoop:
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R3, =b              @ load b
-    LSL R4, R0, #2         @ set the address
+    LSL R4, R0, #2          @ set the address
     ADD R4, R3, R4 
     LDR R1, [R2]            @ read the array at address 
     LDR R3, [R4]
