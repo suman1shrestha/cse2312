@@ -14,44 +14,44 @@
 	.func main
 	
 main:
-    BL _scanf
-    MOV R9, R0
-    MOV R3, R9
-    MOV R0, #0              @ initialze index variable
+    BL _scanf		    @ branch to scanf procedure with return, n
+    MOV R9, R0		    @ move return value R0 to temporary register R9
+    MOV R3, R9		    @ move return value R0 to argument register R3
+    MOV R0, #0              @ initialze index variable, i
     
 generate:
     CMP R0, #20             @ check to see if we are done iterating
-    BEQ generatedone        @ exit loop if done
+    BEQ generatedone        @ branch to generatedone procedure
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
-    ADD R12, R3, R0
+    ADD R12, R3, R0	    @ compute (n+i) and store in R12
     STR R12, [R2]           @ write the value of R12 to a[i]
-    ADD R11, R0, #1
-    ADD R6, R3, R11
-    MOV R8, #0
-    SUB R6, R8, R6
-    ADD R2, R2, #4
-    STR R6, [R2]
-    ADD R0, R0, #2          @ increment index
+    ADD R11, R0, #1	    @ compute (i+1) and store in R11
+    ADD R6, R3, R11         @ computer (n+i+1) and store the vaue in R6
+    MOV R8, #0		    @ store the value 0 into R8
+    SUB R6, R8, R6	    @ compute 0-(n+i+1) and store into R6
+    ADD R2, R2, #4	    @ R2 now has the address (i+1)
+    STR R6, [R2]	    @ store the value of R6 to a[i+1]
+    ADD R0, R0, #2          @ increment index, i=i+2
     B generate              @ branch to next loop iteration
     
 generatedone:
     MOV R0, #0              @ initialze index variable
     
 _copy:
-    CMP R0, #20           
-    BEQ copyDone 
-    LDR R1, =a  
-    LSL R2, R0, #2     
-    ADD R2, R1, R2     
+    CMP R0, #20             @ check to see if we are done iterating
+    BEQ copyDone            @ branch to copyDone procedure
+    LDR R1, =a  	    @ get address of a
+    LSL R2, R0, #2          @ multiply index*4 to get array offset
+    ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ load contents of a into R1
-    LDR R3, =b              @ load b
-    LSL R4, R0, #2         @ set the address
-    ADD R4, R3, R4          @ add b address to R4
-    MOV R5, R1
+    LDR R3, =b              @ get address of b
+    LSL R4, R0, #2          @ multiply index*4 to get array offset
+    ADD R4, R3, R4          @ R4 now has the element address
+    @MOV R5, R1
     ADD R0, R0, #1        @ increment the counter 
-    STR R5, [R4]            @ store the contents of R5 into b
+    STR R1, [R4]            @ store the contents of R5 into b
     B _copy           
     
 copyDone:
