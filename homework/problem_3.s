@@ -43,7 +43,7 @@ generatedone:
 _sort:
     CMP R0, #20
     
-    BEQ _sorted
+    BEQ _sortDone
     ADD R10, R0, #1
     LDR R1, =a 
     LDR R6, =a
