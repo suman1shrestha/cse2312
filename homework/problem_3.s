@@ -63,7 +63,7 @@ _sort:
     CMP R0, #20 
     BEQ sortDone 
     MOV R6, R0
-    LDR R1, =a  
+    LDR R1, =b  
     LSL R2, R0, #2     
     ADD R2, R1, R2 
     LDR R1, [R2]            @ load contents of a into R1
@@ -73,7 +73,7 @@ _sort:
 _sorting:
     CMP R6, #20
     BEQ _sorted
-    LDR R1, =a
+    LDR R1, =b
     LSL R2, R6, #2     
     ADD R2, R1, R2 
     LDR R1, [R2]
@@ -93,7 +93,7 @@ _sorted:
     LDR R3, =b              @ load b
     LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
-    @STR R1, [R2]
+    STR R1, [R2]
     STR R8, [R4]            @ store the contents of R5 into b
     MOV R5, R8
     ADD R0, R0, #1        @ increment the counter 
