@@ -41,7 +41,7 @@ generatedone:
     MOV R10, #0
     
 _sort:
-    CMP R0, #20
+    CMP R0, #19
     MOVEQ R0, R10
     CMP R10, #20
     BEQ sortDone 
