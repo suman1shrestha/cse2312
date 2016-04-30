@@ -51,7 +51,7 @@ _sort:
     LSL R2, R0, #2     
     ADD R2, R1, R2   
     LSL R7, R10, #2
-    ADD R7, R1, R7
+    ADD R7, R6, R7
     LDR R6, [R7]
     LDR R1, [R2]            @ load contents of a into R1
     CMP R6, R1
