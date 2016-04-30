@@ -48,20 +48,21 @@ _sort:
     LSL R2, R0, #2     
     ADD R2, R1, R2 
     LDR R1, [R2]            @ load contents of a into R1
-    MOV R8, R1
+    @MOV R8, R1
     @ADD R6, R0, #1
     
 _sorting:
     CMP R6, #20
     BEQ _sorted
+    LDR R8, =a
     LSL R7, R6, #2     
-    ADD R7, R1, R7 
-    LDR R6, [R7]
+    ADD R7, R8, R7 
+    LDR R8, [R7]
     
-    CMP R6, R8
-    MOVLT R5, R8
-    MOVLT R8, R6
-    MOVLT R6, R5
+    CMP R8, R1
+    MOVLT R5, R1
+    MOVLT R1, R8
+    MOVLT R8, R5
     ADD R6, R6, #1
     B _sorting
     
@@ -70,7 +71,7 @@ _sorted:
     LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
     ADD R0, R0, #1        @ increment the counter 
-    STR R8, [R4]            @ store the contents of R5 into b
+    STR R1, [R4]            @ store the contents of R5 into b
     B _sort           
     
 sortDone:
