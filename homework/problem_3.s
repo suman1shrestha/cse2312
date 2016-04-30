@@ -46,7 +46,7 @@ generatedone:
     
 _sort:
     CMP R0, #20
-    MOVEQ R0, R10
+    ADDEQ R0, R0, #1
     CMP R10, #20
     BEQ sortDone 
     @ADD R6, R0, #1
