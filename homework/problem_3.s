@@ -62,7 +62,7 @@ _sorting:
     
     CMP R1, R8
     ADDEQ R6, R6, #1
-    BE _sorting
+    BEQ _sorting
     
     CMP R1, R8
     MOVLT R5, R8
