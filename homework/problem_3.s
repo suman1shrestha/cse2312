@@ -81,7 +81,7 @@ _swap:
     STR R3, [R7]
     B _sort
     
-_sortDone:
+sortDone:
     MOV R0, #0 
    
 readLoop:
