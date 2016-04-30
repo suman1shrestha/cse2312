@@ -58,13 +58,14 @@ _copy:
     
 copyDone:
     MOV R0, #0    
+    MOV R10, #0
     
 _sort:
     CMP R0, #20 
     BEQ sortDone 
     MOV R6, R0
     LDR R1, =b  
-    LSL R2, R0, #2     
+    LSL R2, R10, #2     
     ADD R2, R1, R2 
     LDR R1, [R2]            @ load contents of a into R1
     MOV R8, R1
@@ -82,10 +83,10 @@ _sorting:
     ADDEQ R6, R6, #1
     BEQ _sorting
     
-    CMP R8, R1
-    MOVLT R5, R1
-    MOVLT R1, R8
-    MOVLT R8, R5
+    CMP R1, R8
+    MOVLT R5, R8
+    MOVLT R8, R1
+    MOVLT R1, R5
     ADD R6, R6, #1
     B _sorting
     
@@ -117,7 +118,6 @@ readLoop:
     PUSH {R1}               @ backup register before printf
     PUSH {R2}   
     PUSH {R3}		    @ backup register before printf
-    @MOV R3, R12
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
     
