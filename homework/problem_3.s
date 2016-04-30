@@ -46,7 +46,7 @@ generatedone:
     
 _sort:
     CMP R0, #20
-    ADDEQ R0, R0, #1
+    BEQ _sorted
     CMP R10, #20
     BEQ sortDone 
     @ADD R6, R0, #1
@@ -63,12 +63,15 @@ _sort:
     MOVLT R8, R5
     ADD R0, R0, #1
     B _sort
+  
+_sorted:
     MOV R6, R1
     LDR R3, =b              @ load b
     LSL R4, R0, #2          @ set the address
     ADD R4, R3, R4          @ add b address to R4
     ADD R10, R10, #1        @ increment the counter 
     STR R6, [R4]            @ store the contents of R5 into b
+    MOV R0, R10
     B _sort            
     
 sortDone:
