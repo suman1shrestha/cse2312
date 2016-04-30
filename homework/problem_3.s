@@ -79,8 +79,10 @@ _sort:
     
 _swap:
     MOV R5, R3
-    STR R8, [R4]
-    STR R3, [R7]
+    MOV R3, R8
+    MOV R8, R5
+    STR R3, [R4]
+    STR R8, [R7]
     B _sort
     
 sorted:
