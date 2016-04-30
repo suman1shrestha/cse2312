@@ -61,11 +61,9 @@ _sorting:
     LDR R1, [R2]
     
     CMP R1, R8
-    BNE _swap
-    ADD R6, R6, #1
-    B _sorting
+    ADDEQ R6, R6, #1
+    BE _sorting
     
-_swap:
     CMP R1, R8
     MOVLT R5, R8
     MOVLT R8, R1
