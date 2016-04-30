@@ -63,7 +63,7 @@ _sort:
     LSL R4, R0, #2         @ set the address
     ADD R4, R3, R4          @ add b address to R4
     @MOV R5, R1
-    ADD R0, R0, #1        @ increment the counter 
+    ADD R10, R10, #1        @ increment the counter 
     STR R1, [R4]            @ store the contents of R5 into b
     B _sort            
     
