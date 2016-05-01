@@ -152,5 +152,5 @@ _printf:
 a:              .skip       80
 b:	.skip		    80
 format_str:		    .asciz		  "%d"
-printf_str:     .asciz      "array_a[%d] = %4d, array_b = %d\n"
+printf_str:     .asciz      "array_a[%d] = %3d, array_b = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
