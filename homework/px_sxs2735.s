@@ -18,17 +18,17 @@ main:
     MOV R8, R0
     LDR R0, =printf_str
     MOV R1, R8
-    BL _printMyArray
+    B _printMyArray
     BL _getMin
     MOV R1, R0
-    BL _printMin
+    B _printMin
     BL _getMax
     MOV R1, R0
-    BL _printMax
+    B _printMax
     BL _getSum
     MOV R1, R0
-    BL _printSum
-    BL _exit
+    B _printSum
+    B _exit
 
 
 _generate:
