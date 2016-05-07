@@ -18,7 +18,6 @@ main:
     MOV R8, R0
     LDR R0, =printf_str
     MOV R1, R8
-    BL _printMyArray
     BL _getMin
     MOV R1, R0
     B _printMin
@@ -77,12 +76,15 @@ _printMin:
     BL printf               @ call printf
     POP {PC}                @ return
 
-_printMyArray:
+_getMin:
     PUSH {LR}
+    BL _getMax
+    MOV R10, R0             @ max = 0
     MOV R0, #0              @ i = 0
 
     readloop:
     CMP R0, #10             @ check to see if we are done iterating
+    MOVEQ R0, R10
     POPEQ {PC}
     LDR R1, =array_a        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
@@ -94,30 +96,13 @@ _printMyArray:
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
     BL  _printf             @ branch to print procedure with return
+    CMP R1, R10              @ sum+= a_array[i]
+    MOVLT R10, R1
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
-    
-_getMin:
-    PUSH {LR}
-    BL _getMax
-    MOV R10, R0             @ max = 0
-    MOV R0, #0              @ i = 0
-
-    minloop:
-    CMP R0, #10             @ check to see if we are done iterating
-    MOVEQ R0, R10
-    POPEQ {PC}              @ exit loop if done
-    LDR R1, =array_a        @ get address of a
-    LSL R2, R0, #2          @ multiply index*4 to get array offset
-    ADD R2, R1, R2          @ R2 now has the element address
-    LDR R1, [R2]            @ read the array at address
-    CMP R1, R10              @ sum+= a_array[i]
-    MOVLT R10, R1
-    ADD R0, R0, #1          @ increment index
-    B   minloop             @ branch to next loop iteration
     
 _getMax:
     PUSH {LR}
