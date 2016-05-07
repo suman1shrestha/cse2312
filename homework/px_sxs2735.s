@@ -40,7 +40,7 @@ _generate:
     writeloop:
     CMP R4, #10        @ if (i <10)
     POPEQ {PC}         @ if R3 = 10, leave
-    LDR R6, =a_array   @address of a_array
+    LDR R6, =array_a   @address of a_array
     LSL R7, R4, #2
     ADD R7, R6, R7
     BL _scanf          @ get user input
@@ -101,7 +101,7 @@ _printMyArray:
     readloop:
     CMP R0, #10             @ check to see if we are done iterating
     POPEQ {PC}
-    LDR R1, =a_array        @ get address of a
+    LDR R1, =array_a        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
@@ -126,7 +126,7 @@ _getSum:
     CMP R0, #10             @ check to see if we are done iterating
     MOVEQ R0, R9
     POPEQ {PC}              @ exit loop if done
-    LDR R1, =a_array        @ get address of a
+    LDR R1, =array_a        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
@@ -143,7 +143,7 @@ _getMax:
     CMP R0, #10             @ check to see if we are done iterating
     MOVEQ R0, R9
     POPEQ {PC}              @ exit loop if done
-    LDR R1, =a_array        @ get address of a
+    LDR R1, =array_a        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
@@ -163,7 +163,7 @@ _getMin:
     CMP R0, #10             @ check to see if we are done iterating
     MOVEQ R0, R10
     POPEQ {PC}              @ exit loop if done
-    LDR R1, =a_array        @ get address of a
+    LDR R1, =array_a        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
@@ -188,8 +188,8 @@ _scanf:
 .data
 
 .balign 4
-a_array:              .skip     40
-printf_str:     .asciz    "a_array[%d] = %d\n"
+array_a:              .skip     40
+printf_str:     .asciz    "array_a[%d] = %d\n"
 printf_Sum:     .asciz    "sum = %d\n"
 format_str:     .asciz    "%d"
 printf_Max:      .ascii   "Maximum = %d\n"
