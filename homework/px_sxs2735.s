@@ -124,7 +124,7 @@ _getSum:
 
     sumloop:
     CMP R0, #10             @ check to see if we are done iterating
-    MOVEQ R0, R9
+    MOVEQ R0, R8
     POPEQ {PC}              @ exit loop if done
     LDR R1, =array_a        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
