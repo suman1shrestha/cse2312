@@ -20,13 +20,13 @@ main:
     MOV R1, R8
     BL _getMin
     MOV R1, R0
-    B _printMin
+    BL _printMin
     BL _getMax
     MOV R1, R0
-    B _printMax
+    BL _printMax
     BL _getSum
     MOV R1, R0
-    B _printSum
+    BL _printSum
     B _exit
 
 
@@ -96,8 +96,8 @@ _getMin:
     MOV R2, R1              @ move array value to R2 for printf
     MOV R1, R0              @ move array index to R1 for printf
     BL  _printf             @ branch to print procedure with return
-    CMP R1, R10              @ sum+= a_array[i]
-    MOVLT R10, R1
+    CMP R2, R10              @ sum+= a_array[i]
+    MOVLT R10, R2
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
