@@ -14,22 +14,17 @@
 .func main
 
 main:
-    MOV R0, #0
-    MOV R3, #0
     BL _generate
     MOV R8, R0
     LDR R0, =printf_str
     MOV R1, R8
     BL _printMyArray
-    MOV R1, R0
     BL _getMin
     MOV R1, R0
     BL _printMin
-    MOV R1, R0
     BL _getMax
     MOV R1, R0
     BL _printMax
-    MOV R1, R0
     BL _getSum
     MOV R1, R0
     BL _printSum
