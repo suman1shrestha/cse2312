@@ -72,7 +72,7 @@ _printf:
     BL printf               @ call printf
     POP {PC}                @ return
 #54
-_printAdd:
+_printSum:
     PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =printf_Sum     @ R0 contains formatted string address
     MOV R1, R1              @
