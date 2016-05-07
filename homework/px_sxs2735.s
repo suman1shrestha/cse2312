@@ -26,7 +26,7 @@ main:
     BL _getMax
     MOV R1, R0
     BL _printAdd
-    BL _getMin
+    BL _getSum
     MOV R1, R0
     BL _printAdd
     BL _exit
