@@ -14,12 +14,7 @@
 .func main
 
 main:
-    MOV R0, #0
-    MOV R3, #0
     BL _generate
-    MOV R8, R0
-    LDR R0, =printf_str
-    MOV R1, R8
     BL _printMyArray
     MOV R1, R0
     BL _getMax
@@ -37,7 +32,7 @@ _generate:
     writeloop:
     CMP R4, #10        @ if (i <10)
     POPEQ {PC}         @ if R3 = 10, leave
-    LDR R6, =a_array   @address of a_array
+    LDR R6, =a         @address of a_array
     LSL R7, R4, #2
     ADD R7, R6, R7
     BL _scanf          @ get user input
@@ -90,7 +85,7 @@ _printMyArray:
     CMP R0, #10             @ check to see if we are done iterating
     MOVEQ R0, R8
     POPEQ {PC}              @ exit loop if done
-    LDR R1, =a_array        @ get address of a
+    LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
@@ -117,7 +112,7 @@ _getMax:
     CMP R0, #10             @ check to see if we are done iterating
     MOVEQ R0, R9
     POPEQ {PC}              @ exit loop if done
-    LDR R1, =a_array        @ get address of a
+    LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
@@ -135,7 +130,7 @@ _getSum:
     CMP R0, #10             @ check to see if we are done iterating
     MOVEQ R0, R9
     POPEQ {PC}              @ exit loop if done
-    LDR R1, =a_array        @ get address of a
+    LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
