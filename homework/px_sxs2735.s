@@ -22,13 +22,11 @@ main:
     MOV R1, R8
     BL _printMyArray
     MOV R1, R0
-    BL _printMin
     BL _getMax
-    MOV R1, R0
-    BL _printMax
+    MOV R2, R0
     BL _getSum
-    MOV R1, R0
-    BL _printSum
+    MOV R3, R0
+    BL _printResults
     BL _exit
 
 
@@ -72,24 +70,12 @@ _printf:
     BL printf               @ call printf
     POP {PC}                @ return
 #54
-_printMin:
+_printResults:
     PUSH {LR}               @ store LR since printf call overwrites
-    LDR R0, =printf_Min     @ R0 contains formatted string address
+    LDR R0, =results        @ R0 contains formatted string address
     MOV R1, R1              @
-    BL printf               @ call printf
-    POP {PC}                @ return
-
-_printMax:
-    PUSH {LR}               @ store LR since printf call overwrites
-    LDR R0, =printf_Max     @ R0 contains formatted string address
-    MOV R1, R1              @
-    BL printf               @ call printf
-    POP {PC}                @ return
-    
-_printSum:
-    PUSH {LR}               @ store LR since printf call overwrites
-    LDR R0, =printf_Sum     @ R0 contains formatted string address
-    MOV R1, R1              @
+    MOV R2, R2
+    MOV R3, R3
     BL printf               @ call printf
     POP {PC}                @ return
 
@@ -173,10 +159,8 @@ _scanf:
 .data
 
 .balign 4
-a_array:              .skip     40
-printf_str:     .asciz    "a_array[%d] = %d\n"
-printf_Sum:     .asciz    "sum = %d\n"
+a:                        .skip     40
+printf_str:     .asciz    "array_a[%d] = %d\n"
 format_str:     .asciz    "%d"
-printf_Min:      .ascii   "Minimum = %d\n"
-printf_Max:      .ascii   "Maximum = %d\n"
+printf_results: .ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
 exit_str:       .ascii    "Terminate program.\n"
