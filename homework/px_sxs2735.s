@@ -14,7 +14,12 @@
 .func main
 
 main:
+    MOV R0, #0
+    MOV R3, #0
     BL _generate
+    MOV R8, R0
+    LDR R0, =printf_str
+    MOV R1, R8
     BL _printMyArray
     MOV R1, R0
     BL _getMax
@@ -157,5 +162,5 @@ _scanf:
 a:                        .skip     40
 printf_str:     .asciz    "array_a[%d] = %d\n"
 format_str:     .asciz    "%d"
-results:        .ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
+results: .ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
 exit_str:       .ascii    "Terminate program.\n"
