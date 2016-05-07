@@ -21,12 +21,15 @@ main:
     LDR R0, =printf_str
     MOV R1, R8
     BL _printMyArray
+    MOV R1, R0
     BL _getMin
     MOV R1, R0
     BL _printMin
+    MOV R1, R0
     BL _getMax
     MOV R1, R0
     BL _printMax
+    MOV R1, R0
     BL _getSum
     MOV R1, R0
     BL _printSum
@@ -104,7 +107,8 @@ _printMyArray:
     
 _getMin:
     PUSH {LR}
-    MOV R10, #0              @ max = 0
+    BL _getMax
+    MOV R10, R0             @ max = 0
     MOV R0, #0              @ i = 0
 
     minloop:
