@@ -95,10 +95,12 @@ _printMin:
 
 #80
 _printMyArray:
+    PUSH {LR}
     MOV R0, #0              @ i = 0
 
     readloop:
     CMP R0, #10             @ check to see if we are done iterating
+    POPEQ {PC}
     LDR R1, =a_array        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
