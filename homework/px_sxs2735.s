@@ -22,8 +22,14 @@ main:
     MOV R1, R8
     BL _printMyArray
     BL _getMin
+    MOV R1, R0
+    BL _printMin
     BL _getMax
+    MOV R1, R0
+    BL _printMax
     BL _getSum
+    MOV R1, R0
+    BL _printSum
     BL _exit
 
 
@@ -95,12 +101,10 @@ _printMyArray:
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
-    B _getMin
     
 _getMin:
     PUSH {LR}
-    BL _getMax
-    MOV R10, R0              @ max = 0
+    MOV R10, #0              @ max = 0
     MOV R0, #0              @ i = 0
 
     minloop:
@@ -115,8 +119,6 @@ _getMin:
     MOVLT R10, R1
     ADD R0, R0, #1          @ increment index
     B   minloop             @ branch to next loop iteration
-    MOV R1, R0
-    BL _printMin
     
 _getMax:
     PUSH {LR}
@@ -135,8 +137,6 @@ _getMax:
     MOVGT R9, R1
     ADD R0, R0, #1          @ increment index
     B   maxloop             @ branch to next loop iteration
-    MOV R1, R0
-    BL _printMax
     
 _getSum:
     PUSH {LR}
@@ -154,8 +154,6 @@ _getSum:
     ADD R8, R8, R0          @ sum+= a_array[i]
     ADD R0, R0, #1          @ increment index
     B   sumloop             @ branch to next loop iteration
-    MOV R1, R0
-    BL _printSum
 
 _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
