@@ -22,13 +22,13 @@ main:
     MOV R1, R8
     BL _printMyArray
     MOV R1, R0
-    BL _printAdd
+    BL _printMin
     BL _getMax
     MOV R1, R0
-    BL _printAdd
+    BL _printMax
     BL _getSum
     MOV R1, R0
-    BL _printAdd
+    BL _printSum
     BL _exit
 
 
@@ -72,14 +72,26 @@ _printf:
     BL printf               @ call printf
     POP {PC}                @ return
 #54
-_printAdd:
+_printMin:
     PUSH {LR}               @ store LR since printf call overwrites
-    LDR R0, =printf_Add     @ R0 contains formatted string address
+    LDR R0, =printf_Min     @ R0 contains formatted string address
     MOV R1, R1              @
     BL printf               @ call printf
     POP {PC}                @ return
 
-
+_printMax:
+    PUSH {LR}               @ store LR since printf call overwrites
+    LDR R0, =printf_Max     @ R0 contains formatted string address
+    MOV R1, R1              @
+    BL printf               @ call printf
+    POP {PC}                @ return
+    
+_printSum:
+    PUSH {LR}               @ store LR since printf call overwrites
+    LDR R0, =printf_Sum     @ R0 contains formatted string address
+    MOV R1, R1              @
+    BL printf               @ call printf
+    POP {PC}                @ return
 
 #80
 _printMyArray:
@@ -163,7 +175,8 @@ _scanf:
 .balign 4
 a_array:              .skip     40
 printf_str:     .asciz    "a_array[%d] = %d\n"
-printf_Add:     .asciz    "sum = %d\n"
+printf_Sum:     .asciz    "sum = %d\n"
 format_str:     .asciz    "%d"
-prompt_str:      .ascii   "Enter the @ character: "
+printf_Min:      .ascii   "Minimum = %d\n"
+printf_Max:      .ascii   "Maximum = %d\n"
 exit_str:       .ascii    "Terminate program.\n"
