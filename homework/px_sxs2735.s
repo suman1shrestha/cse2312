@@ -157,5 +157,5 @@ _scanf:
 a:                        .skip     40
 printf_str:     .asciz    "array_a[%d] = %d\n"
 format_str:     .asciz    "%d"
-printf_results: .ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
+results:        .ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
 exit_str:       .ascii    "Terminate program.\n"
