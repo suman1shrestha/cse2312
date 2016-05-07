@@ -18,7 +18,7 @@ main:
     MOV R8, R0
     LDR R0, =printf_str
     MOV R1, R8
-    B _printMyArray
+    BL _printMyArray
     BL _getMin
     MOV R1, R0
     B _printMin
