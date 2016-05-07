@@ -21,6 +21,9 @@ main:
     LDR R0, =printf_str
     MOV R1, R8
     BL _printMyArray
+    BL _getMin
+    BL _getMax
+    BL _getSum
     BL _exit
 
 
