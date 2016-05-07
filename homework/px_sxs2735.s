@@ -48,21 +48,7 @@ _generate:
     STR R5, [R7]       @ a_array[i] = R8
     ADD R4, R4, #1     @ i++;
     B writeloop
-    
 
-#27
-_exit:  
-    MOV R7, #4              @ write syscall, 4
-    MOV R0, #1              @ output stream to monitor, 1
-    MOV R2, #21             @ print string length
-    LDR R1, =exit_str       @ string at label exit_str:
-    SWI 0                   @ execute syscall
-    MOV R7, #1              @ terminate syscall, 1
-    SWI 0                   @ execute syscall
-
-
-#38
-#47
 _printf:
     PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
@@ -71,7 +57,7 @@ _printf:
     MOV R3, R3
     BL printf               @ call printf
     POP {PC}                @ return
-#54
+    
 _printSum:
     PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =printf_Sum     @ R0 contains formatted string address
@@ -93,7 +79,6 @@ _printMin:
     BL printf               @ call printf
     POP {PC}                @ return
 
-#80
 _printMyArray:
     PUSH {LR}
     MOV R0, #0              @ i = 0
@@ -152,7 +137,6 @@ _getMax:
     ADD R0, R0, #1          @ increment index
     B   maxloop             @ branch to next loop iteration
 
-
 _getMin:
     PUSH {LR}
     BL _getMax
@@ -182,7 +166,14 @@ _scanf:
     ADD SP, SP, #4          @ restore the stack pointer
     POP {PC}
 
-
+_exit:  
+    MOV R7, #4              @ write syscall, 4
+    MOV R0, #1              @ output stream to monitor, 1
+    MOV R2, #21             @ print string length
+    LDR R1, =exit_str       @ string at label exit_str:
+    SWI 0                   @ execute syscall
+    MOV R7, #1              @ terminate syscall, 1
+    SWI 0                   @ execute syscall
 
 
 .data
