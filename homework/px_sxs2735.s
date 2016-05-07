@@ -81,7 +81,7 @@ _printMyArray:
     MOV R0, #0              @ i = 0
     MOV R8, #0              @ sum = 0
     MOV R9, #0              @ max = 0
-    MOV R10, #999           @ min = 0
+    MOV R10, #900          @ min = 0
 
     readloop:
     CMP R0, #10             @ check to see if we are done iterating
@@ -130,4 +130,4 @@ printf_str:     .asciz    "a_array[%d] = %d\n"
 printf_Add:     .asciz    "sum = %d\n"
 format_str:     .asciz    "%d"
 prompt_str:      .ascii   "Enter the @ character: "
-exit_str:       .ascii    "Terminate program.\n"
+exit_str:       .ascii    "Terminate program."
