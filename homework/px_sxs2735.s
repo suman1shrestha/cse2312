@@ -92,6 +92,7 @@ _printMyArray:
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
+    B _getMin
     
 _getMin:
     PUSH {LR}
@@ -111,7 +112,6 @@ _getMin:
     MOVLT R10, R1
     ADD R0, R0, #1          @ increment index
     B   minloop             @ branch to next loop iteration
-    BL _getMin
     MOV R1, R0
     BL _printMin
     
@@ -132,7 +132,6 @@ _getMax:
     MOVGT R9, R1
     ADD R0, R0, #1          @ increment index
     B   maxloop             @ branch to next loop iteration
-    BL _getMax
     MOV R1, R0
     BL _printMax
     
@@ -152,7 +151,6 @@ _getSum:
     ADD R8, R8, R0          @ sum+= a_array[i]
     ADD R0, R0, #1          @ increment index
     B   sumloop             @ branch to next loop iteration
-    BL _getSum
     MOV R1, R0
     BL _printSum
 
