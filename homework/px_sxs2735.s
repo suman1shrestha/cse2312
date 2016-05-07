@@ -21,15 +21,6 @@ main:
     LDR R0, =printf_str
     MOV R1, R8
     BL _printMyArray
-    BL _getMin
-    MOV R1, R0
-    BL _printMin
-    BL _getMax
-    MOV R1, R0
-    BL _printMax
-    BL _getSum
-    MOV R1, R0
-    BL _printSum
     BL _exit
 
 
@@ -102,41 +93,6 @@ _printMyArray:
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
     
-_getSum:
-    PUSH {LR}
-    MOV R0, #0              @ i = 0
-    MOV R8, #0              @ max = 0
-
-    sumloop:
-    CMP R0, #10             @ check to see if we are done iterating
-    MOVEQ R0, R8
-    POPEQ {PC}              @ exit loop if done
-    LDR R1, =array_a        @ get address of a
-    LSL R2, R0, #2          @ multiply index*4 to get array offset
-    ADD R2, R1, R2          @ R2 now has the element address
-    LDR R1, [R2]            @ read the array at address
-    ADD R8, R8, R0          @ sum+= a_array[i]
-    ADD R0, R0, #1          @ increment index
-    B   sumloop             @ branch to next loop iteration
-    
-_getMax:
-    PUSH {LR}
-    MOV R0, #0              @ i = 0
-    MOV R9, #0              @ max = 0
-
-    maxloop:
-    CMP R0, #10             @ check to see if we are done iterating
-    MOVEQ R0, R9
-    POPEQ {PC}              @ exit loop if done
-    LDR R1, =array_a        @ get address of a
-    LSL R2, R0, #2          @ multiply index*4 to get array offset
-    ADD R2, R1, R2          @ R2 now has the element address
-    LDR R1, [R2]            @ read the array at address
-    CMP R1, R9              @ sum+= a_array[i]
-    MOVGT R9, R1
-    ADD R0, R0, #1          @ increment index
-    B   maxloop             @ branch to next loop iteration
-
 _getMin:
     PUSH {LR}
     BL _getMax
@@ -155,6 +111,50 @@ _getMin:
     MOVLT R10, R1
     ADD R0, R0, #1          @ increment index
     B   minloop             @ branch to next loop iteration
+    BL _getMin
+    MOV R1, R0
+    BL _printMin
+    
+_getMax:
+    PUSH {LR}
+    MOV R0, #0              @ i = 0
+    MOV R9, #0              @ max = 0
+
+    maxloop:
+    CMP R0, #10             @ check to see if we are done iterating
+    MOVEQ R0, R9
+    POPEQ {PC}              @ exit loop if done
+    LDR R1, =array_a        @ get address of a
+    LSL R2, R0, #2          @ multiply index*4 to get array offset
+    ADD R2, R1, R2          @ R2 now has the element address
+    LDR R1, [R2]            @ read the array at address
+    CMP R1, R9              @ sum+= a_array[i]
+    MOVGT R9, R1
+    ADD R0, R0, #1          @ increment index
+    B   maxloop             @ branch to next loop iteration
+    BL _getMax
+    MOV R1, R0
+    BL _printMax
+    
+_getSum:
+    PUSH {LR}
+    MOV R0, #0              @ i = 0
+    MOV R8, #0              @ max = 0
+
+    sumloop:
+    CMP R0, #10             @ check to see if we are done iterating
+    MOVEQ R0, R8
+    POPEQ {PC}              @ exit loop if done
+    LDR R1, =array_a        @ get address of a
+    LSL R2, R0, #2          @ multiply index*4 to get array offset
+    ADD R2, R1, R2          @ R2 now has the element address
+    LDR R1, [R2]            @ read the array at address
+    ADD R8, R8, R0          @ sum+= a_array[i]
+    ADD R0, R0, #1          @ increment index
+    B   sumloop             @ branch to next loop iteration
+    BL _getSum
+    MOV R1, R0
+    BL _printSum
 
 _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
