@@ -3,7 +3,7 @@
 * @brief simple get keyboard input of one integer number and populate a fixed-size
 * integer array and perform operations
 *
-* Simple program of invoking syscall to retrieve one integer number n
+* Simple program of invoking syscall to retrieve 10 integer numbers 
 * from keyboard, and populate a fixed-size integer array, then find the * sum, maximum and minimum number in the array.
 * and then print them
 *
