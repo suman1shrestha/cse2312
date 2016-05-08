@@ -161,4 +161,4 @@ a:              .skip     40
 printf_str:     .asciz    "array_a[%d] = %d\n"
 format_str:     .asciz    "%d"
 results: 	.ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
-exit_str:       .ascii    "Terminating program.\n"
+exit_str:       .ascii    "\n"
