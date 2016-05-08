@@ -17,7 +17,6 @@ main:
     MOV R4, #0
     BL _writeArray
 
-
 _writeArray:
     CMP R4, #10        @ if (i <10)
     BEQ writedone
@@ -28,7 +27,6 @@ _writeArray:
     MOV R5, R0         @ puts user input to R8
     STR R5, [R7]       @ a_array[i] = R8
     ADD R4, R4, #1     @ i++;
-    
     B _writeArray
     
 writedone:
@@ -55,12 +53,12 @@ readloop:
 
 readDone:
     MOV R0, #0		        @ re-initialize index variable
-	LDR R1, =a      	    @ get the address of array
-	LSL R2, R0, #2		    @ multiply index*4 to get array offset
-	ADD R2, R1, R2	    	@ R2 now has the element address
-	LDR R8, [R2]	    	@ store the first element in R3
-	ADD R0, R0, #1	    	@ increase the index
-	B   _getMin	        	@ branch to procedure _findMin to find minimum
+    LDR R1, =a      	    @ get the address of array
+    LSL R2, R0, #2		    @ multiply index*4 to get array offset
+    ADD R2, R1, R2	    	@ R2 now has the element address
+    LDR R8, [R2]	    	@ store the first element in R3
+    ADD R0, R0, #1	    	@ increase the index
+    B   _getMin	        	@ branch to procedure _findMin to find minimum
 	
 _getMin:
     CMP R0, #10             @ check to see if we are done iterating
@@ -76,12 +74,12 @@ _getMin:
 
 minDone:
     MOV R0, #0		        @ re-initialize index variable
-	LDR R1, =a      	    @ get the address of array
-	LSL R2, R0, #2		    @ multiply index*4 to get array offset
-	ADD R2, R1, R2	    	@ R2 now has the element address
-	LDR R9, [R2]	    	@ store the first element in R3
-	ADD R0, R0, #1	    	@ increase the index
-	B   _getMax	         	@ branch to procedure _findMin to find minimum
+    LDR R1, =a      	    @ get the address of array
+    LSL R2, R0, #2		    @ multiply index*4 to get array offset
+    ADD R2, R1, R2	    	@ R2 now has the element address
+    LDR R9, [R2]	    	@ store the first element in R3
+    ADD R0, R0, #1	    	@ increase the index
+    B   _getMax	         	@ branch to procedure _findMin to find minimum
    
     
 _getMax:
@@ -98,12 +96,12 @@ _getMax:
     
 maxDone:
     MOV R0, #0		        @ re-initialize index variable
-	LDR R1, =a      	    @ get the address of array
-	LSL R2, R0, #2		    @ multiply index*4 to get array offset
-	ADD R2, R1, R2	    	@ R2 now has the element address
-	LDR R10, [R2]	    	@ store the first element in R3
-	ADD R0, R0, #1	    	@ increase the index
-	B   _getSum	         	@ branch to procedure _findMin to find minimum
+    LDR R1, =a      	    @ get the address of array
+    LSL R2, R0, #2		    @ multiply index*4 to get array offset
+    ADD R2, R1, R2	    	@ R2 now has the element address
+    LDR R10, [R2]	    	@ store the first element in R3
+    ADD R0, R0, #1	    	@ increase the index
+    B   _getSum	         	@ branch to procedure _findMin to find minimum
 	
 _getSum:
     CMP R0, #10             @ check to see if we are done iterating
@@ -121,6 +119,7 @@ sumDone:
     MOV R2, R9
     MOV R3, R10
     BL _printResults
+    B _exit
 
 _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
@@ -141,28 +140,23 @@ _exit:
     MOV R7, #1              @ terminate syscall, 1
     SWI 0                   @ execute syscall
 
-
-#38
-#47
 _printf:
     PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
     BL printf               @ call printf
     POP {PC}                @ return
-#54
+
 _printResults:
     PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =results        @ R0 contains formatted string address
     BL printf               @ call printf
     POP {PC}                @ return
 
-
-
 .data
 
 .balign 4
-a:                        .skip     40
+a:              .skip     40
 printf_str:     .asciz    "array_a[%d] = %d\n"
 format_str:     .asciz    "%d"
-results: .ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
-exit_str:       .ascii    "Terminate program.\n"
+results: 	.ascii    "Minimum = %d\nMaximum = %d\nSum = %d\n"
+exit_str:       .ascii    "Terminating program.\n"
