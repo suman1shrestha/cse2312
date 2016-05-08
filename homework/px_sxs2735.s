@@ -79,7 +79,7 @@ minDone:
     ADD R2, R1, R2	    	@ R2 now has the element address
     LDR R9, [R2]	    	@ store the first element in R3
     ADD R0, R0, #1	    	@ increase the index
-    B   _getMax	         	@ branch to procedure _findMin to find minimum
+    B  _getMax	         	@ branch to procedure _findMin to find minimum
    
     
 _getMax:
@@ -147,7 +147,7 @@ _exit:
     MOV R7, #4              @ write syscall, 4
     MOV R0, #1              @ output stream to monitor, 1
     MOV R2, #21             @ print string length
-    LDR R1, =exit_str       @ string at label exit_str:
+    LDR R1, =exit_str       @ string at label exit_str
     SWI 0                   @ execute syscall
     MOV R7, #1              @ terminate syscall, 1
     SWI 0                   @ execute syscall
