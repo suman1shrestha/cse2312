@@ -64,9 +64,6 @@ _exit:
 _printf:
     PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
-    MOV R1, R1              @ (used to be R3 instead)R1 contains printf argument (redundant line)
-    MOV R2, R2
-    MOV R3, R3
     BL printf               @ call printf
     POP {PC}                @ return
 #54
@@ -126,17 +123,17 @@ _getMax:
 _getSum:
     PUSH {LR}
     MOV R0, #0              @ i = 0
-    MOV R9, #0              @ max = 0
+    MOV R10, #0              @ max = 0
 
     minloop:
     CMP R0, #10             @ check to see if we are done iterating
-    MOVEQ R0, R9
+    MOVEQ R0, R10
     POPEQ {PC}              @ exit loop if done
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
     LDR R1, [R2]            @ read the array at address
-    ADD R9, R9, R1          @ sum+= a_array[i]
+    ADD R10, R10, R1          @ sum+= a_array[i]
     ADD R0, R0, #1          @ increment index
     B   minloop             @ branch to next loop iteration
 
