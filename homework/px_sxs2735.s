@@ -73,9 +73,6 @@ _printf:
 _printResults:
     PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =results        @ R0 contains formatted string address
-    MOV R1, R1              @
-    MOV R2, R2
-    MOV R3, R3
     BL printf               @ call printf
     POP {PC}                @ return
 
