@@ -12,18 +12,18 @@
 	.func main
 
 main:
-	BL _scanf				@ branch to scanf prodecure with return
+	BL  scanf				@ branch to scanf prodecure with return
 	MOV R9, R0				
-	BL _getchar
+	BL  getchar
 	MOV R10, R0
-	BL _scanf
+	BL  scanf
 	MOV R8, R0
 	MOV R1, R9
 	MOV R2,	R10
-	MOV R3, R11
-	BL _compare
-	MOV R8, R0
-	BL _printf
+	MOV R3, R8
+	BL  comparing
+	MOV R12, R0
+	BL  printing
 	B main
 
 getchar:
@@ -42,13 +42,13 @@ getchar:
 comparing:
 	MOV R4, LR
 	CMP R2, #'+'			@ comparing against the constant char '+'
-	BLEQ _add				@ branch to make equal handler
+	BLEQ adding				@ branch to make equal handler
 	CMP R2, #'-'			@ comparing against the constatn char '-'
-	BLEQ _sub				@ branch to equal handler
+	BLEQ subtracting				@ branch to equal handler
 	CMP R2, #'*'			@ compare against the constatn char '*'
-	BLEQ _mult				@ branch to equal handler
+	BLEQ multiplying				@ branch to equal handler
 	CMP R2, #'M'			@ compare against the constatn char 'M'
-	BLEQ _max				@ branch to equal handler
+	BLEQ maximize				@ branch to equal handler
 	MOV PC, R4
 	
 	
@@ -67,7 +67,7 @@ scanf:
 printing:
 	MOV R4, LR 				@ store LR since printf call overwrites
 	LDR R0, =print_str		@ R0 contains formatted string address
-	MOV R1, R8				@ R8 contains printf argument (redundant line)
+	MOV R1, R12				@ R8 contains printf argument (redundant line)
 	BL printf 				@ call printf
 	MOV PC, R4				@ return
 
@@ -94,3 +94,4 @@ maximize:
 format_str:		.asciz		"%d"
 read_char:		.ascii		" "
 print_str:		.asciz		"%d\n"
+
