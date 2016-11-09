@@ -12,18 +12,18 @@
 	.func main
 
 main:
-	BL  scanf				@ branch to scanf prodecure with return
+	BL _scanf				@ branch to scanf prodecure with return
 	MOV R9, R0				
-	BL  getchar
+	BL getchar
 	MOV R10, R0
-	BL  scanf
+	BL _scanf
 	MOV R8, R0
 	MOV R1, R9
 	MOV R2,	R10
 	MOV R3, R8
-	BL  comparing
+	BL comparing
 	MOV R12, R0
-	BL  printing
+	BL printing
 	B main
 
 getchar:
@@ -52,7 +52,7 @@ comparing:
 	MOV PC, R4
 	
 	
-scanf:
+_scanf:
 	MOV R4, LR 				@ store LR since scanf call overwrites
 	SUB SP, SP, #4			@ make romm on stack
 	LDR R0, =format_str		@ R0 contains address of format string
